@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "Authenticator"
+    },
+    {
+      "name": "mainPageMenu_add",
+      "value": "Add"
+    },
+    {
+      "name": "mainPageMenu_search",
+      "value": "Search"
+    },
+    {
+      "name": "mainPageMenu_more",
+      "value": "More"
     }
   ]
 }
