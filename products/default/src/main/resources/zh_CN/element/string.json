@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "Authenticator"
+    },
+    {
+      "name": "mainPageMenu_add",
+      "value": "添加"
+    },
+    {
+      "name": "mainPageMenu_search",
+      "value": "搜索"
+    },
+    {
+      "name": "mainPageMenu_more",
+      "value": "更多"
     }
   ]
 }
