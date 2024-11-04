@@ -1,3 +1,5 @@
+import promptAction from '@ohos.promptAction'
+
 @Entry
 @Component
 struct Index {
@@ -7,7 +9,33 @@ struct Index {
     {
       value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_add')),
       icon: 'resources/base/media/ic_public_add.svg',
-      action: () => {}
+      action: () => {
+        this.getUIContext().showAlertDialog({
+          title: $r('app.string.addDialog_title'),
+          message: $r('app.string.addDialog_description'),
+          alignment: DialogAlignment.Center,
+          buttons: [
+            {
+              value: $r('app.string.addDialog_scanToAdd'),
+              action: () => {
+                promptAction.showToast({
+                  message: 'Add by Scan',
+                  duration: 2000
+                })
+              }
+            },
+            {
+              value: $r('app.string.addDialog_manualAdd'),
+              action: () => {
+                promptAction.showToast({
+                  message: 'Add Manually',
+                  duration: 2000
+                })
+              }
+            }
+          ]
+        })
+      }
     },
     {
       value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_search')),
