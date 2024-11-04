@@ -23,6 +23,22 @@
     {
       "name": "mainPageMenu_more",
       "value": "更多"
+    },
+    {
+      "name": "addDialog_title",
+      "value": "添加验证器"
+    },
+    {
+      "name": "addDialog_description",
+      "value": "选择添加验证器的方式"
+    },
+    {
+      "name": "addDialog_scanToAdd",
+      "value": "扫描二维码"
+    },
+    {
+      "name": "addDialog_manualAdd",
+      "value": "手动输入"
     }
   ]
 }

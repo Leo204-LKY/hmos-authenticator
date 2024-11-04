@@ -23,6 +23,22 @@
     {
       "name": "mainPageMenu_more",
       "value": "More"
+    },
+    {
+      "name": "addDialog_title",
+      "value": "Add Authenticator"
+    },
+    {
+      "name": "addDialog_description",
+      "value": "Select a way to add a new authenticator"
+    },
+    {
+      "name": "addDialog_scanToAdd",
+      "value": "Scan Code"
+    },
+    {
+      "name": "addDialog_manualAdd",
+      "value": "Manually"
     }
   ]
 }
