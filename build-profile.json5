@@ -40,6 +40,10 @@
     {
       "name": "auth",
       "srcPath": "./features/auth",
+    },
+    {
+      "name": "uicomponents",
+      "srcPath": "./commons/uicomponents",
     }
   ]
 }
