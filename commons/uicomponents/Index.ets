@@ -1,1 +1,1 @@
-export { LabelledTextInput as MainPage } from './src/main/ets/components/LabelledTextInput'
+export { LabelledTextInput } from './src/main/ets/components/LabelledTextInput'
