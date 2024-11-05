@@ -1,10 +1,6 @@
 {
   "string": [
     {
-      "name": "page_show",
-      "value": "page from package"
-    },
-    {
       "name": "LabelledTextInput_defaultErrorMessage",
       "value": "Please fill in this field."
     }
