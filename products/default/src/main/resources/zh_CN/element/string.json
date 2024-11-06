@@ -45,6 +45,10 @@
       "value": "手动输入"
     },
     {
+      "name": "manualAddPage_title",
+      "value": "添加验证器"
+    },
+    {
       "name": "manualAddPage_issuer",
       "value": "提供者"
     },
