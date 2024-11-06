@@ -1,7 +1,7 @@
 @Component
 export struct LabelledTextInput {
   @Link text: string;
-  @State label: string = 'Label';
+  @State label: ResourceStr = 'Label';
   @State inputType: InputType = InputType.Normal;
   @State inputEnabled: boolean = true;
   @State maxInputLength: number | null = null;
