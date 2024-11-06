@@ -13,6 +13,10 @@
       "value": "Authenticator"
     },
     {
+      "name": "mainPage_title",
+      "value": "Authenticator"
+    },
+    {
       "name": "mainPageMenu_add",
       "value": "Add"
     },
@@ -39,6 +43,58 @@
     {
       "name": "addDialog_manualAdd",
       "value": "Manually"
+    },
+    {
+      "name": "manualAddPage_issuer",
+      "value": "Issuer"
+    },
+    {
+      "name": "manualAddPage_account",
+      "value": "Account"
+    },
+    {
+      "name": "manualAddPage_secret",
+      "value": "Secret"
+    },
+    {
+      "name": "manualAddPage_type",
+      "value": "Type"
+    },
+    {
+      "name": "manualAddPage_hash",
+      "value": "Hash"
+    },
+    {
+      "name": "manualAddPage_interval",
+      "value": "Update Interval(s)"
+    },
+    {
+      "name": "manualAddPage_digits",
+      "value": "Digits"
+    },
+    {
+      "name": "manualAddPage_showAdvancedButton",
+      "value": "Show Advanced Settings"
+    },
+    {
+      "name": "manualAddPage_notSupportToast",
+      "value": "Currently not supported."
+    },
+    {
+      "name": "manualAddPage_cancelDialog_title",
+      "value": "Cancel"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_description",
+      "value": "Confirm cancelling?"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_yes",
+      "value": "Yes"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_no",
+      "value": "No"
     }
   ]
 }

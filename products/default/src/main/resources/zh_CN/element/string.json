@@ -13,6 +13,10 @@
       "value": "Authenticator"
     },
     {
+      "name": "mainPage_title",
+      "value": "Authenticator"
+    },
+    {
       "name": "mainPageMenu_add",
       "value": "添加"
     },
@@ -39,6 +43,58 @@
     {
       "name": "addDialog_manualAdd",
       "value": "手动输入"
+    },
+    {
+      "name": "manualAddPage_issuer",
+      "value": "提供者"
+    },
+    {
+      "name": "manualAddPage_account",
+      "value": "账户名称"
+    },
+    {
+      "name": "manualAddPage_secret",
+      "value": "密钥"
+    },
+    {
+      "name": "manualAddPage_type",
+      "value": "类型"
+    },
+    {
+      "name": "manualAddPage_hash",
+      "value": "哈希函数"
+    },
+    {
+      "name": "manualAddPage_interval",
+      "value": "更新间隔（秒）"
+    },
+    {
+      "name": "manualAddPage_digits",
+      "value": "位数"
+    },
+    {
+      "name": "manualAddPage_showAdvancedButton",
+      "value": "显示高级设置"
+    },
+    {
+      "name": "manualAddPage_notSupportToast",
+      "value": "暂不支持修改"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_title",
+      "value": "取消"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_description",
+      "value": "确认取消？"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_yes",
+      "value": "是"
+    },
+    {
+      "name": "manualAddPage_cancelDialog_no",
+      "value": "否"
     }
   ]
 }
