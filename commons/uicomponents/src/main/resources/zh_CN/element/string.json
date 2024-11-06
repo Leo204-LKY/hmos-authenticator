@@ -3,6 +3,10 @@
     {
       "name": "LabelledTextInput_defaultErrorMessage",
       "value": "请填写此字段。"
+    },
+    {
+      "name": "LabelledSelect_defaultNoSelectMessage",
+      "value": "请选择…"
     }
   ]
 }

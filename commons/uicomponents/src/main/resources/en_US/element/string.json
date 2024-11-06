@@ -3,6 +3,10 @@
     {
       "name": "LabelledTextInput_defaultErrorMessage",
       "value": "Please fill in this field."
+    },
+    {
+      "name": "LabelledSelect_defaultNoSelectMessage",
+      "value": "Select an option..."
     }
   ]
 }
