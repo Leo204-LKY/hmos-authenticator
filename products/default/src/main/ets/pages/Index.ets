@@ -50,7 +50,7 @@ struct Index {
   build() {
     Navigation() {
       Scroll() {
-        Column() {
+        Column({ space: 10 }) {
           ForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], () => {
             Row() {
               Column() {
@@ -80,13 +80,17 @@ struct Index {
               top: 16,
               bottom: 16
             })
-            .margin({ bottom: 10 })
           })
         }
       }
+      .width('100%')
+      .padding({ left: 4, right: 4})
+      .edgeEffect(EdgeEffect.Spring)
     }
+    .height('100%')
+    .width('100%')
     .title($r('app.string.mainPage_title'))
     .menus(this.menuItems)
-    .backgroundColor('#F1F2F3')
+    .backgroundColor($r('sys.color.gray_01'))
   }
 }
