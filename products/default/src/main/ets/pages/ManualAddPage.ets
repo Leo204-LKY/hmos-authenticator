@@ -19,7 +19,7 @@ struct ManualAddPage {
   build() {
     Column() {
       EditableTitleBar({
-        title: 'Add',
+        title: $r('app.string.manualAddPage_title'),
         onSave: () => {},
         onCancel: this.cancelOperation
       })

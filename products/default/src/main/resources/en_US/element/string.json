@@ -45,6 +45,10 @@
       "value": "Manually"
     },
     {
+      "name": "manualAddPage_title",
+      "value": "Add Authenticator"
+    },
+    {
       "name": "manualAddPage_issuer",
       "value": "Issuer"
     },
