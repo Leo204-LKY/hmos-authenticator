@@ -6,6 +6,7 @@ export struct LabelledSelect {
   @State value: ResourceStr = '';
   @State selectOption: Array<SelectOption> = [];
   @State noSelectMessage: ResourceStr = $r('app.string.LabelledSelect_defaultNoSelectMessage')
+  onSelect: () => void = () => {};
 
   aboutToAppear() {
     if (this.selectedIndex == -1) {
@@ -24,6 +25,7 @@ export struct LabelledSelect {
         .selected(this.selectedIndex)
         .value(this.value)
         .enabled(this.selectEnabled)
+        .onSelect(() => { this.onSelect(); })
     }
     .width('100%')
     .alignItems(HorizontalAlign.Start)
