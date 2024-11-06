@@ -1,4 +1,5 @@
 import promptAction from '@ohos.promptAction'
+import router from '@ohos.router'
 
 @Entry
 @Component
@@ -27,10 +28,7 @@ struct Index {
             {
               value: $r('app.string.addDialog_manualAdd'),
               action: () => {
-                promptAction.showToast({
-                  message: 'Add Manually',
-                  duration: 2000
-                })
+                router.pushUrl({ url: 'pages/ManualAddPage' })
               }
             }
           ]
