@@ -10,6 +10,7 @@ export struct LabelledTextInput {
   @State required: boolean = false;
   @State errorMessage: ResourceStr = $r("app.string.LabelledTextInput_defaultErrorMessage");
   onChange: () => void = () => {};
+  private _defaultText: string = this.text;
   private _currentError: ResourceStr | undefined = undefined; // 首次留空不报错
 
   build() {
@@ -25,6 +26,7 @@ export struct LabelledTextInput {
         .enterKeyType(this.enterKeyType)
         .showError(this._currentError)
         .onChange(() => {
+          if (this.text == this._defaultText) return;
           this.onChange();
           if (this.text.length === 0 && this.required) {
             this._currentError = this.errorMessage;
