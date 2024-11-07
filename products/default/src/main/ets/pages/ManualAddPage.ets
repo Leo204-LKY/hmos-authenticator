@@ -9,8 +9,8 @@ struct ManualAddPage {
   @State issuer: string = '';
   @State account: string = '';
   @State secret: string = '';
-  @State updateInterval: string = '';
-  @State digits: string = '';
+  @State updateInterval: string = '30';
+  @State digits: string = '6';
   @State selectedOTPType: number = 0;
   @State selectedHashType: number = 0;
   @State advancedSettingsVisible: boolean = false;
@@ -84,16 +84,9 @@ struct ManualAddPage {
                   { value: 'SHA512' }
                 ],
                 selectedIndex: this.selectedHashType,
-                selectEnabled: false,
                 onSelect: this.onItemEdit
               })
                 .width('100%')
-                .onClick(() => {
-                  promptAction.showToast({
-                    message: $r('app.string.manualAddPage_notSupportToast'),
-                    duration: 2000
-                  })
-                })
             }
 
             GridItem() {
@@ -140,10 +133,10 @@ struct ManualAddPage {
   }
 
   cancelOperation = () => {
-    if ( true ) { // this.itemEdited 的修改疑似存在 bug，作占位用
+    if ( this.itemEdited ) {
       this.getUIContext().showAlertDialog({
         title: $r('app.string.manualAddPage_cancelDialog_title'),
-        message: $r('app.string.manualAddPage_cancelDialog_description'), // You have already entered something, confirm cancelling?
+        message: $r('app.string.manualAddPage_cancelDialog_description'),
         alignment: DialogAlignment.Center,
         buttons: [
           {
