@@ -90,7 +90,7 @@
     },
     {
       "name": "manualAddPage_cancelDialog_description",
-      "value": "Confirm cancelling?"
+      "value": "You have already entered something, confirm cancelling operation?"
     },
     {
       "name": "manualAddPage_cancelDialog_yes",
