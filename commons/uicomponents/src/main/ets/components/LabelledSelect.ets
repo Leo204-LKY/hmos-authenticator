@@ -20,6 +20,7 @@ export struct LabelledSelect {
     Column({ space: 5 }) {
       Text(this.label)
         .offset({ left: 16, right: 16 })
+        .fontColor(this.selectEnabled ? 'primary' : $r('sys.color.gray_04'))
       Select(this.selectOption)
         .width('100%')
         .selected(this.selectedIndex)

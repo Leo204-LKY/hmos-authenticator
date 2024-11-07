@@ -16,6 +16,7 @@ export struct LabelledTextInput {
     Column({ space: 5 }) {
       Text(this.label)
         .offset({ left: 16, right: 16 })
+        .fontColor(this.inputEnabled ? 'primary' : $r('sys.color.gray_04'))
       TextInput({ placeholder: this.placeholder, text: $$this.text })
         .width('100%')
         .type(this.inputType)
