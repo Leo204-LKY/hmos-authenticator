@@ -90,7 +90,7 @@
     },
     {
       "name": "manualAddPage_cancelDialog_description",
-      "value": "确认取消？"
+      "value": "你已经输入了一些内容，确认取消操作？"
     },
     {
       "name": "manualAddPage_cancelDialog_yes",
