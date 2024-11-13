@@ -1,1 +1,1 @@
-export { AuthenticatorClass, OtpTypes, OtpAlgorithms } from './src/main/ets/components/AuthenticatorClass'
+export { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from './src/main/ets/components/AuthenticatorClass'
