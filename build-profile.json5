@@ -44,6 +44,10 @@
     {
       "name": "uicomponents",
       "srcPath": "./commons/uicomponents",
+    },
+    {
+      "name": "globalVariable",
+      "srcPath": "./commons/globalVariable"
     }
   ]
 }
