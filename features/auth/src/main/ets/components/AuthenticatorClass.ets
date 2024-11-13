@@ -3,6 +3,17 @@ import cryptoFramework from '@ohos.security.cryptoFramework';
 export type OtpTypes = 'topt';
 export type OtpAlgorithms = 'SHA1' | 'SHA256' | 'SHA512';
 
+export interface AuthenticatorClassOptions {
+  id: number;
+  issuer: string;
+  secret: string;
+  account?: string;
+  algorithm?: OtpAlgorithms;
+  protocol?: OtpTypes;
+  digits?: number;
+  updateInterval?: number
+}
+
 export class AuthenticatorClass {
   private _id: number;                        // 验证器 ID
   private _issuer: string;                    // 发行者
@@ -13,15 +24,15 @@ export class AuthenticatorClass {
   private _digits: number = 6;                // OTP 位数，默认/常用为 6 位
   private _updateInterval: number = 30;       // 更新周期，默认 30s
 
-  constructor(id: number, issuer: string, secret: string, account?: string, algorithm?: OtpAlgorithms, protocol?: OtpTypes, digits?: number, updateInterval?: number) {
-    this._id = id;
-    this._issuer = issuer;
-    this._secret = secret;
-    if (account) this._account = account;
-    if (algorithm) this._algorithm = algorithm;
-    if (protocol) this._protocol = protocol;
-    if (digits) this._digits = digits;
-    if (updateInterval) this._updateInterval = updateInterval;
+  constructor(options: AuthenticatorClassOptions) {
+    this._id = options.id;
+    this._issuer = options.issuer;
+    this._secret = options.secret;
+    if (options.account) this._account = options.account;
+    if (options.algorithm) this._algorithm = options.algorithm;
+    if (options.protocol) this._protocol = options.protocol;
+    if (options.digits) this._digits = options.digits;
+    if (options.updateInterval) this._updateInterval = options.updateInterval;
   }
 
   get id(): number { return this._id; }
