@@ -6,6 +6,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "uicomponents": "file:../../commons/uicomponents"
+    "uicomponents": "file:../../commons/uicomponents",
+    "globalvariable": "file:../../commons/globalVariable"
   }
 }
