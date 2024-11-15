@@ -33,6 +33,21 @@ export default class EntryAbility extends UIAbility {
     this.rdbStore.loadRdbStore(this.context, storeConfig)
       .then(() => {
         console.log('RdbStore acquired.');
+
+        this.rdbStore.getAll(new relationalStore.RdbPredicates('authenticator'))
+          .then((result) => {
+            console.log('message', result)
+          })
+
+        // 初始化数据库
+        this.rdbStore.execute(tableCreationQuery)
+          .then(() => {
+            console.log('Successfully initialized RdbStore.');
+          })
+          .catch((error: BusinessError) => {
+            console.error('Failed to initialize RdbStore: ' + error);
+            return;
+          });
       })
       .catch((error: BusinessError) => {
         console.error('Error getting RdbStore: ', error);
@@ -46,16 +61,6 @@ export default class EntryAbility extends UIAbility {
       })
       .catch((error: BusinessError) => {
         console.error('Error getting preferences: ' + error);
-        return;
-      });
-
-    // 初始化数据库
-    this.rdbStore.execute(tableCreationQuery)
-      .then(() => {
-        console.log('Successfully initialized RdbStore.');
-      })
-      .catch((error: BusinessError) => {
-        console.error('Failed to initialize RdbStore: ' + error);
         return;
       });
   }
