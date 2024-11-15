@@ -1,10 +1,44 @@
 import promptAction from '@ohos.promptAction'
 import router from '@ohos.router'
+import relationalStore from '@ohos.data.relationalStore'
+import { RelationalStore, Preferences } from 'globalvariable'
+import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from 'auth'
+
+const rdbStore = RelationalStore.getInstance();
+const preferences = Preferences.getInstance();
+
+async function getAuthenticators(): Promise<AuthenticatorClass[]> {
+  let predicates: relationalStore.RdbPredicates = new relationalStore.RdbPredicates('authenticator');
+  let queryResult = await rdbStore.getAll(predicates);
+  let authenticators: AuthenticatorClass[] = [];
+  let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+
+  for (let i = 0; i < authenticatorSequence.length; i++) {
+    for (let j = 0; j < queryResult.length; j++) {
+      if (authenticatorSequence[i] == queryResult[j].id) {
+        let options: AuthenticatorClassOptions = {
+          id: queryResult[j].id as number,
+          issuer: queryResult[j].issuer as string,
+          secret: queryResult[j].secret as string,
+          protocol: queryResult[j].protocol as OtpTypes,
+          algorithm: queryResult[j].algorithm as OtpAlgorithms,
+          digits: queryResult[j].digits as number,
+          updateInterval: queryResult[j].update_interval as number
+        }
+
+        authenticators.push(new AuthenticatorClass(options));
+        break;
+      }
+    }
+  }
+
+  return authenticators;
+}
 
 @Entry
 @Component
 struct Index {
-  @State text: string = 'email@mail.com'
+  @State authenticators: AuthenticatorClass[] = [];
 
   private menuItems: Array<NavigationMenuItem> = [
     {
@@ -49,17 +83,17 @@ struct Index {
 
   build() {
     Navigation() {
-      Scroll() {
-        Column({ space: 10 }) {
-          ForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], () => {
+      List({ space: 10 }) {
+        ForEach(this.authenticators, (item: AuthenticatorClass) => {
+          ListItem() {
             Row() {
               Column() {
-                Text('Microsoft')
+                Text(item.issuer)
                   .fontSize(20)
                   .fontWeight(FontWeight.Bold)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .maxLines(1)
-                Text(this.text)
+                Text(item.account)
                   .fontSize(15)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .maxLines(1)
@@ -80,17 +114,25 @@ struct Index {
               top: 16,
               bottom: 16
             })
-          })
-        }
+          }
+        })
       }
+      .height('100%')
       .width('100%')
-      .padding({ left: 4, right: 4})
-      .edgeEffect(EdgeEffect.Spring)
+      .listDirection(Axis.Vertical)
+      .alignListItem(ListItemAlign.Center)
     }
     .height('100%')
     .width('100%')
     .title($r('app.string.mainPage_title'))
     .menus(this.menuItems)
     .backgroundColor($r('sys.color.gray_01'))
+  }
+
+  aboutToAppear(): void {
+    getAuthenticators()
+      .then((authenticators) => {
+        this.authenticators = authenticators;
+      });
   }
 }
