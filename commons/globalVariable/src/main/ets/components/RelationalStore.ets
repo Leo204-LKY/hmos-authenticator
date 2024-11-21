@@ -24,10 +24,17 @@ export class RelationalStore {
     await this.rdbStore.executeSql(sql, bindArgs);
   }
 
-  public async insert(table: string, values: relationalStore.ValuesBucket, conflict?: relationalStore.ConflictResolution) {
+  public async insert(table: string, values: relationalStore.ValuesBucket, conflict?: relationalStore.ConflictResolution): Promise<number> {
     if (this.rdbStore == undefined) throw new Error('Relational Database not loaded.');
 
-    await this.rdbStore.insert(table, values, conflict);
+    let rowId: number;
+    if (conflict == undefined) {
+      rowId = await this.rdbStore.insert(table, values);
+    } else {
+      rowId = await this.rdbStore.insert(table, values, conflict);
+    }
+
+    return rowId
   }
 
   public async delete(predicates: relationalStore.RdbPredicates) {
