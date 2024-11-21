@@ -36,7 +36,7 @@ export class AuthenticatorClass {
   }
 
   get id(): number { return this._id; }
-  get issuer(): string | null { return this._issuer; }
+  get issuer(): string { return this._issuer; }
   get account(): string | null { return this._account; }
   get digits(): number { return this._digits; }
   get updateInterval(): number { return this._updateInterval; }
