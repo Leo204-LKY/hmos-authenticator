@@ -35,6 +35,77 @@ async function getAuthenticators(): Promise<AuthenticatorClass[]> {
   return authenticators;
 }
 
+@Component
+struct AuthenticatorItem {
+  @Require @Prop authenticator: AuthenticatorClass
+  @Prop issuer: string;
+  @Prop account: string | null;
+  @Prop code: string = '';
+  @Prop updateInterval: number;
+  @Prop timeLeft: number = Math.floor(Date.now() / 1000 / this.updateInterval);
+
+  build() {
+    Column() {
+      Row() {
+        Column() {
+          Text(this.issuer)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .maxLines(1)
+          Text(this.authenticator.account)
+            .fontSize(15)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .maxLines(1)
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
+
+        Text(this.code)
+          .fontWeight(600)
+          .fontSize(32)
+      }
+
+      Blank()
+        .height(4)
+
+      Progress({ value: 0, total: this.updateInterval, type: ProgressType.Linear })
+        .height(2)
+        .value(this.timeLeft)
+    }
+    .backgroundColor('white')
+    .borderRadius(16)
+    .width('95%')
+    .padding({
+      left: 16,
+      right: 16,
+      top: 16,
+      bottom: 16
+    })
+  }
+
+  aboutToAppear() {
+    this.issuer = this.authenticator.issuer;
+    this.account = this.authenticator.account;
+    this.updateInterval = this.authenticator.updateInterval;
+    this.authenticator.getCode()
+      .then((code: string) => {
+        this.code = code;
+      })
+
+    getContext(this).eventHub.on('onEmitTimestamp', (timestamp: number) => {
+      this.timeLeft = this.updateInterval - (timestamp % this.updateInterval);
+
+      if (this.timeLeft === this.updateInterval) {
+        this.authenticator.getCode()
+          .then((code) => {
+            this.code = code;
+          })
+      }
+    })
+  }
+}
+
 @Entry
 @Component
 struct Index {
@@ -81,39 +152,17 @@ struct Index {
     }
   ]
 
+  emitTimestamp() {
+    const timestamp = Math.floor(Date.now() / 1000);
+    getContext(this).eventHub.emit('onEmitTimestamp', timestamp);
+  }
+
   build() {
     Navigation() {
       List({ space: 10 }) {
         ForEach(this.authenticators, (item: AuthenticatorClass) => {
           ListItem() {
-            Row() {
-              Column() {
-                Text(item.issuer)
-                  .fontSize(20)
-                  .fontWeight(FontWeight.Bold)
-                  .textOverflow({ overflow: TextOverflow.Ellipsis })
-                  .maxLines(1)
-                Text(item.account)
-                  .fontSize(15)
-                  .textOverflow({ overflow: TextOverflow.Ellipsis })
-                  .maxLines(1)
-              }
-              .alignItems(HorizontalAlign.Start)
-              .layoutWeight(1)
-
-              Text('123 456')
-                .fontWeight(600)
-                .fontSize(32)
-            }
-            .backgroundColor('white')
-            .borderRadius(16)
-            .width('95%')
-            .padding({
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: 16
-            })
+            AuthenticatorItem({ authenticator: item })
           }
         })
       }
@@ -130,6 +179,7 @@ struct Index {
   }
 
   aboutToAppear(): void {
+    setInterval(() => { this.emitTimestamp(); }, 1000);
     getAuthenticators()
       .then((authenticators) => {
         this.authenticators = authenticators;
