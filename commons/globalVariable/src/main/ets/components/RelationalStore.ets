@@ -1,5 +1,5 @@
 import { common } from '@kit.AbilityKit';
-import { relationalStore } from "@kit.ArkData";
+import { relationalStore, ValueType } from "@kit.ArkData";
 
 export class RelationalStore {
   private static instance: RelationalStore;
@@ -61,5 +61,19 @@ export class RelationalStore {
 
     resultSet.close();
     return result;
+  }
+
+  public async querySql(sql: string, bindArgs?: Array<ValueType>): Promise<relationalStore.ValuesBucket[]> {
+    if (this.rdbStore == undefined) throw new Error('Relational Database not loaded.');
+
+    let results: Array<relationalStore.ValuesBucket> = [];
+    let resultSet = await this.rdbStore.querySql(sql, bindArgs);
+
+    while (resultSet.goToNextRow()) {
+      results.push(resultSet.getRow());
+    }
+
+    resultSet.close();
+    return results;
   }
 }
