@@ -1,6 +1,6 @@
 import cryptoFramework from '@ohos.security.cryptoFramework';
 
-export type OtpTypes = 'topt';
+export type OtpTypes = 'TOTP';
 export type OtpAlgorithms = 'SHA1' | 'SHA256' | 'SHA512';
 
 export interface AuthenticatorClassOptions {
@@ -19,7 +19,7 @@ export class AuthenticatorClass {
   private _issuer: string;                    // 发行者
   private _account: string | null = null;     // 账号，如邮箱
   private _secret: string;                    // 密钥，通常为 16 位
-  private _protocol: OtpTypes = 'topt';       // 密钥更新协议，默认/常用为 TOTP，暂不支持 HOTP）
+  private _protocol: OtpTypes = 'TOTP';       // 密钥更新协议，默认/常用为 TOTP，暂不支持 HOTP）
   private _algorithm: OtpAlgorithms = 'SHA1'; // 密钥生成算法，默认/常用为 SHA1
   private _digits: number = 6;                // OTP 位数，默认/常用为 6 位
   private _updateInterval: number = 30;       // 更新周期，默认 30s
