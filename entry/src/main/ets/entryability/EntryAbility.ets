@@ -2,7 +2,8 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { relationalStore } from '@kit.ArkData';
-import { RelationalStore, Preferences } from 'globalvariable'
+import { RelationalStore } from '../utils/RelationalStore'
+import { Preferences } from '../utils/Preferences'
 import { BusinessError } from '@kit.BasicServicesKit';
 
 const storeConfig: relationalStore.StoreConfig = {
@@ -33,11 +34,6 @@ export default class EntryAbility extends UIAbility {
     this.rdbStore.loadRdbStore(this.context, storeConfig)
       .then(() => {
         console.log('RdbStore acquired.');
-
-        this.rdbStore.getAll(new relationalStore.RdbPredicates('authenticator'))
-          .then((result) => {
-            console.log('message', result)
-          })
 
         // 初始化数据库
         this.rdbStore.execute(tableCreationQuery)

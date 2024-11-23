@@ -1,8 +1,9 @@
 import promptAction from '@ohos.promptAction'
 import router from '@ohos.router'
 import relationalStore from '@ohos.data.relationalStore'
-import { RelationalStore, Preferences } from 'globalvariable'
-import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from 'auth'
+import { RelationalStore } from '../utils/RelationalStore'
+import { Preferences } from '../utils/Preferences'
+import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from '../models/AuthenticatorClass'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();

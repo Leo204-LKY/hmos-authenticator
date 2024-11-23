@@ -99,6 +99,14 @@
     {
       "name": "manualAddPage_cancelDialog_no",
       "value": "No"
+    },
+    {
+      "name": "LabelledTextInput_defaultErrorMessage",
+      "value": "Please fill in this field."
+    },
+    {
+      "name": "LabelledSelect_defaultNoSelectMessage",
+      "value": "Select an option..."
     }
   ]
 }
