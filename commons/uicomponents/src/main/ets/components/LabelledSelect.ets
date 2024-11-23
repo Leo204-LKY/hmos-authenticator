@@ -3,7 +3,7 @@ export struct LabelledSelect {
   @State label: ResourceStr = 'Label';
   @State selectEnabled: boolean = true;
   @Link selectedIndex: number;
-  @State value: ResourceStr = '';
+  @Link value: ResourceStr;
   @State selectOption: Array<SelectOption> = [];
   @State noSelectMessage: ResourceStr = $r('app.string.LabelledSelect_defaultNoSelectMessage')
   onSelect: () => void = () => {};
