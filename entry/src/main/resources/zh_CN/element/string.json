@@ -99,6 +99,14 @@
     {
       "name": "manualAddPage_cancelDialog_no",
       "value": "否"
+    },
+    {
+      "name": "LabelledTextInput_defaultErrorMessage",
+      "value": "请填写此字段。"
+    },
+    {
+      "name": "LabelledSelect_defaultNoSelectMessage",
+      "value": "请选择…"
     }
   ]
 }

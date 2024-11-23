@@ -1,8 +1,10 @@
 import { EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar';
 import router from '@ohos.router';
-import { LabelledTextInput, LabelledSelect } from 'uicomponents'
+import { LabelledSelect } from '../components/LabelledSelect'
+import { LabelledTextInput } from '../components/LabelledTextInput'
 import { promptAction } from '@kit.ArkUI';
-import { Preferences, RelationalStore } from 'globalvariable';
+import { RelationalStore } from '../utils/RelationalStore'
+import { Preferences } from '../utils/Preferences'
 import { ValuesBucket } from '@kit.ArkData';
 
 const rdbStore = RelationalStore.getInstance();
