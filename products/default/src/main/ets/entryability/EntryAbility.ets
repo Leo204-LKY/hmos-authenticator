@@ -11,11 +11,11 @@ const storeConfig: relationalStore.StoreConfig = {
 };
 
 const tableCreationQuery: string = 'CREATE TABLE IF NOT EXISTS authenticator (' +
-  'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
+  'id INTEGER PRIMARY KEY, ' +
   'issuer TEXT NOT NULL, ' +
   'account TEXT DEFAULT NULL, ' +
   'secret TEXT NOT NULL, ' +
-  'protocol TEXT NOT NULL DEFAULT \'totp\', ' +
+  'protocol TEXT NOT NULL DEFAULT \'TOTP\', ' +
   'algorithm TEXT NOT NULL DEFAULT \'SHA1\', ' +
   'digits INTEGER NOT NULL DEFAULT 6, ' +
   'update_interval INTEGER NOT NULL DEFAULT 30);';
