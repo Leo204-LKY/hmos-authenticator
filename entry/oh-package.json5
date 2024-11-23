@@ -1,9 +1,8 @@
 {
-  "name": "auth",
+  "name": "entry",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
-  "main": "Index.ets",
+  "main": "",
   "author": "",
-  "license": "Apache-2.0",
-  "dependencies": {}
+  "license": ""
 }
