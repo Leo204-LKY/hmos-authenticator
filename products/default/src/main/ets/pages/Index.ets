@@ -19,6 +19,7 @@ async function getAuthenticators(): Promise<AuthenticatorClass[]> {
         let options: AuthenticatorClassOptions = {
           id: queryResult[j].id as number,
           issuer: queryResult[j].issuer as string,
+          account: queryResult[j].account as string,
           secret: queryResult[j].secret as string,
           protocol: queryResult[j].protocol as OtpTypes,
           algorithm: queryResult[j].algorithm as OtpAlgorithms,
@@ -42,7 +43,7 @@ struct AuthenticatorItem {
   @Prop account: string | null;
   @Prop code: string = '';
   @Prop updateInterval: number;
-  @Prop timeLeft: number = Math.floor(Date.now() / 1000 / this.updateInterval);
+  @Prop timeLeft: number;
 
   build() {
     Column() {
@@ -53,7 +54,7 @@ struct AuthenticatorItem {
             .fontWeight(FontWeight.Bold)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
             .maxLines(1)
-          Text(this.authenticator.account)
+          Text(this.account)
             .fontSize(15)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
             .maxLines(1)
@@ -92,17 +93,22 @@ struct AuthenticatorItem {
       .then((code: string) => {
         this.code = code;
       })
+    this.updateTimeLeft(Math.floor(Date.now() / 1000))
 
     getContext(this).eventHub.on('onEmitTimestamp', (timestamp: number) => {
-      this.timeLeft = this.updateInterval - (timestamp % this.updateInterval);
+      this.updateTimeLeft(timestamp)
+    });
+  }
 
-      if (this.timeLeft === this.updateInterval) {
-        this.authenticator.getCode()
-          .then((code) => {
-            this.code = code;
-          })
-      }
-    })
+  updateTimeLeft(timestamp: number) {
+    this.timeLeft = this.updateInterval - (timestamp % this.updateInterval);
+
+    if (this.timeLeft === this.updateInterval) {
+      this.authenticator.getCode()
+        .then((code) => {
+          this.code = code;
+        })
+    }
   }
 }
 
@@ -180,6 +186,9 @@ struct Index {
 
   aboutToAppear(): void {
     setInterval(() => { this.emitTimestamp(); }, 1000);
+  }
+
+  onPageShow(): void {
     getAuthenticators()
       .then((authenticators) => {
         this.authenticators = authenticators;
