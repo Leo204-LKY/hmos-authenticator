@@ -2,6 +2,22 @@ import { EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar';
 import router from '@ohos.router';
 import { LabelledTextInput, LabelledSelect } from 'uicomponents'
 import { promptAction } from '@kit.ArkUI';
+import { Preferences, RelationalStore } from 'globalvariable';
+import { ValuesBucket } from '@kit.ArkData';
+
+const rdbStore = RelationalStore.getInstance();
+const preferences = Preferences.getInstance();
+
+const otpOptions: SelectOption[] = [
+  { value: 'TOTP' },
+  { value: 'HOTP' }
+]
+
+const hashOptions: SelectOption[] = [
+  { value: 'SHA1' },
+  { value: 'SHA256' },
+  { value: 'SHA512' }
+]
 
 @Entry
 @Component
@@ -11,8 +27,10 @@ struct ManualAddPage {
   @State secret: string = '';
   @State updateInterval: string = '30';
   @State digits: string = '6';
-  @State selectedOTPType: number = 0;
-  @State selectedHashType: number = 0;
+  @State selectedOTPIndex: number = 0;
+  @State selectedOTPValue: string = '';
+  @State selectedHashIndex: number = 0;
+  @State selectedHashValue: string = '';
   @State advancedSettingsVisible: boolean = false;
   @State itemEdited: boolean = false;
 
@@ -20,7 +38,7 @@ struct ManualAddPage {
     Column() {
       EditableTitleBar({
         title: $r('app.string.manualAddPage_title'),
-        onSave: () => {},
+        onSave: this.saveAuthenticator,
         onCancel: this.cancelOperation
       })
 
@@ -58,11 +76,9 @@ struct ManualAddPage {
             GridItem() {
               LabelledSelect({
                 label: $r('app.string.manualAddPage_type'),
-                selectOption: [
-                  { value: 'TOTP' },
-                  { value: 'HOTP' }
-                ],
-                selectedIndex: this.selectedOTPType,
+                selectOption: otpOptions,
+                selectedIndex: this.selectedOTPIndex,
+                value: this.selectedOTPValue,
                 selectEnabled: false,
                 onSelect: this.onItemEdit
               })
@@ -78,12 +94,9 @@ struct ManualAddPage {
             GridItem() {
               LabelledSelect({
                 label: $r('app.string.manualAddPage_hash'),
-                selectOption: [
-                  { value: 'SHA1' },
-                  { value: 'SHA256' },
-                  { value: 'SHA512' }
-                ],
-                selectedIndex: this.selectedHashType,
+                selectOption: hashOptions,
+                selectedIndex: this.selectedHashIndex,
+                value: this.selectedHashValue,
                 onSelect: this.onItemEdit
               })
                 .width('100%')
@@ -152,6 +165,35 @@ struct ManualAddPage {
       })
     } else {
       router.back();
+    }
+  }
+
+  saveAuthenticator = async () => {
+    if (this.issuer.length == 0 || this.secret.length == 0 || this.updateInterval.length == 0 || this.digits.length == 0) {
+      promptAction.showToast({
+        message: 'Please fill in all required fields',
+        duration: 2000
+      })
+    } else {
+      let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+      let values: ValuesBucket = {
+        issuer: this.issuer,
+        account: this.account,
+        secret: this.secret,
+        protocol: this.selectedOTPValue,
+        algorithm: this.selectedHashValue,
+        digits: this.digits,
+        update_interval: this.updateInterval
+      }
+
+      let rowId = await rdbStore.insert('authenticator', values)
+
+      if (rowId != -1) {
+        authenticatorSequence.push(rowId);
+        preferences.set('authenticatorSequence', authenticatorSequence);
+
+        router.back();
+      }
     }
   }
 
