@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "default",
+    "name": "entry",
     "type": "entry",
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",

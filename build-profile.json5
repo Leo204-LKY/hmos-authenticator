@@ -26,8 +26,8 @@
   },
   "modules": [
     {
-      "name": "default",
-      "srcPath": "./products/default",
+      "name": "entry",
+      "srcPath": "./entry",
       "targets": [
         {
           "name": "default",
@@ -36,18 +36,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "auth",
-      "srcPath": "./features/auth",
-    },
-    {
-      "name": "uicomponents",
-      "srcPath": "./commons/uicomponents",
-    },
-    {
-      "name": "globalVariable",
-      "srcPath": "./commons/globalVariable"
     }
   ]
 }
