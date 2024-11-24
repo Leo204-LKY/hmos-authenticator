@@ -91,17 +91,22 @@ struct Index {
 
   build() {
     Navigation() {
-      List({ space: 10 }) {
-        ForEach(this.authenticators, (item: AuthenticatorClass) => {
-          ListItem() {
-            AuthenticatorItem({ authenticator: item })
-          }
-        })
+      Scroll() {
+        List({ space: 10 }) {
+          ForEach(this.authenticators, (item: AuthenticatorClass) => {
+            ListItem() {
+              AuthenticatorItem({ authenticator: item })
+            }
+          })
+        }
+        .width('100%')
+        .listDirection(Axis.Vertical)
+        .alignListItem(ListItemAlign.Center)
       }
       .height('100%')
       .width('100%')
-      .listDirection(Axis.Vertical)
-      .alignListItem(ListItemAlign.Center)
+      .align(Alignment.Top)
+      .edgeEffect(EdgeEffect.Spring)
     }
     .height('100%')
     .width('100%')
