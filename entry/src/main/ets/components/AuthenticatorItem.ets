@@ -20,7 +20,7 @@ export struct AuthenticatorItem {
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .maxLines(1)
             Text(this.account)
-              .fontSize(15)
+              .fontSize(16)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .maxLines(1)
           }
@@ -33,20 +33,23 @@ export struct AuthenticatorItem {
         }
 
         Blank()
-          .height(4)
+          .height(8)
 
         Progress({ value: 0, total: this.updateInterval, type: ProgressType.Linear })
-          .height(2)
+          .height(4)
           .value(this.timeLeft)
       }
       .backgroundColor('white')
       .borderRadius(16)
-      .width('95%')
       .padding({
         left: 16,
         right: 16,
         top: 16,
         bottom: 16
+      })
+      .margin({
+        left: 16,
+        right: 16
       })
     }
   }

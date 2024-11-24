@@ -97,8 +97,11 @@ struct Index {
               AuthenticatorItem({ authenticator: item })
           })
         }
+        .width('100%')
+        .height('100%')
         .listDirection(Axis.Vertical)
         .alignListItem(ListItemAlign.Center)
+        .margin({ top: 24 })
       }
       .height('100%')
       .width('100%')
