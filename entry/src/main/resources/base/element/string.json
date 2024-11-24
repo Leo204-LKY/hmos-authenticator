@@ -94,11 +94,11 @@
     },
     {
       "name": "manualAddPage_cancelDialog_yes",
-      "value": "Yes"
+      "value": "YES"
     },
     {
       "name": "manualAddPage_cancelDialog_no",
-      "value": "No"
+      "value": "NO"
     },
     {
       "name": "LabelledTextInput_defaultErrorMessage",
