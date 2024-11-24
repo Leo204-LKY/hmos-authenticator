@@ -94,12 +94,9 @@ struct Index {
       Scroll() {
         List({ space: 10 }) {
           ForEach(this.authenticators, (item: AuthenticatorClass) => {
-            ListItem() {
               AuthenticatorItem({ authenticator: item })
-            }
           })
         }
-        .width('100%')
         .listDirection(Axis.Vertical)
         .alignListItem(ListItemAlign.Center)
       }
@@ -113,6 +110,7 @@ struct Index {
     .title($r('app.string.mainPage_title'))
     .menus(this.menuItems)
     .backgroundColor($r('sys.color.gray_01'))
+    .mode(NavigationMode.Stack)
   }
 
   aboutToAppear(): void {
