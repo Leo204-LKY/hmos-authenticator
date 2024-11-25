@@ -107,6 +107,34 @@
     {
       "name": "LabelledSelect_defaultNoSelectMessage",
       "value": "Select an option..."
+    },
+    {
+      "name": "ConfirmRemoveDialog_title",
+      "value": "Remove %s?"
+    },
+    {
+      "name": "ConfirmRemoveDialog_description",
+      "value": "Removing this authenticator does not disable two-factor authentication. You must disable the authenticator from your account settings with the provider before removing it here."
+    },
+    {
+      "name": "ConfirmRemoveDialog_verificationCodeDescription_1",
+      "value": "Enter verification code "
+    },
+    {
+      "name": "ConfirmRemoveDialog_verificationCodeDescription_2",
+      "value": " to confirm removing:"
+    },
+    {
+      "name": "ConfirmRemoveDialog_codeInputPlaceholder",
+      "value": "Enter verification code..."
+    },
+    {
+      "name": "ConfirmRemoveDialog_cancelButton",
+      "value": "CANCEL"
+    },
+    {
+      "name": "ConfirmRemoveDialog_removeButton",
+      "value": "REMOVE"
     }
   ]
 }
