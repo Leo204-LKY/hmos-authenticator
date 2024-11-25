@@ -25,14 +25,16 @@ export struct LabelledTextInput {
         .maxLength(this.maxInputLength)
         .enterKeyType(this.enterKeyType)
         .showError(this._currentError)
+        .border({ width: 2 })
+        .borderColor(this._currentError ? $r('sys.color.warning') : '#0000')  // 无错误时设置边框透明
         .onChange(() => {
-          if (this.text == this._defaultText) return;
-          this.onChange();
           if (this.text.length === 0 && this.required) {
             this._currentError = this.errorMessage;
           } else {
             this._currentError = undefined;
           }
+          if (this.text == this._defaultText) return;
+          this.onChange();
         })
     }
     .width('100%')
