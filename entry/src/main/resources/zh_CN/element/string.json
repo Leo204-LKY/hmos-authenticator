@@ -85,19 +85,19 @@
       "value": "暂不支持修改"
     },
     {
-      "name": "manualAddPage_cancelDialog_title",
+      "name": "CancelAddDialog_title",
       "value": "取消"
     },
     {
-      "name": "manualAddPage_cancelDialog_description",
+      "name": "CancelAddDialog_description",
       "value": "你已经输入了一些内容，确认取消操作？"
     },
     {
-      "name": "manualAddPage_cancelDialog_yes",
+      "name": "CancelAddDialog_yesButton",
       "value": "是"
     },
     {
-      "name": "manualAddPage_cancelDialog_no",
+      "name": "CancelAddDialog_noButton",
       "value": "否"
     },
     {

@@ -5,6 +5,7 @@ import { LabelledTextInput } from '../components/LabelledTextInput'
 import { promptAction } from '@kit.ArkUI';
 import { RelationalStore } from '../utils/RelationalStore'
 import { Preferences } from '../utils/Preferences'
+import { CancelAddDialog } from '../components/CancelAddDialog'
 import { ValuesBucket } from '@kit.ArkData';
 
 const rdbStore = RelationalStore.getInstance();
@@ -35,6 +36,11 @@ struct ManualAddPage {
   @State selectedHashValue: string = '';
   @State advancedSettingsVisible: boolean = false;
   @State itemEdited: boolean = false;
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: CancelAddDialog({
+      confirm: () => { router.back() }
+    }),
+  })
 
   build() {
     Column() {
@@ -149,22 +155,7 @@ struct ManualAddPage {
 
   cancelOperation = () => {
     if ( this.itemEdited ) {
-      this.getUIContext().showAlertDialog({
-        title: $r('app.string.manualAddPage_cancelDialog_title'),
-        message: $r('app.string.manualAddPage_cancelDialog_description'),
-        alignment: DialogAlignment.Center,
-        buttons: [
-          {
-            value: $r('app.string.manualAddPage_cancelDialog_no'),
-            action: () => {}
-          },
-          {
-            value: $r('app.string.manualAddPage_cancelDialog_yes'),
-            action: () => { router.back() }
-          }
-        ],
-        cancel: () => {}
-      })
+      this.dialogController?.open();
     } else {
       router.back();
     }
