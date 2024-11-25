@@ -84,11 +84,6 @@ struct Index {
     }
   ]
 
-  emitTimestamp() {
-    const timestamp = Math.floor(Date.now() / 1000);
-    getContext(this).eventHub.emit('onEmitTimestamp', timestamp);
-  }
-
   build() {
     Navigation() {
       Scroll() {
@@ -118,6 +113,7 @@ struct Index {
 
   aboutToAppear(): void {
     setInterval(() => { this.emitTimestamp(); }, 1000);
+    getContext(this).eventHub.on('onDeleteAuthenticator', (id: number) => { this.deleteAuthenticator(id); })
   }
 
   onPageShow(): void {
@@ -125,5 +121,19 @@ struct Index {
       .then((authenticators) => {
         this.authenticators = authenticators;
       });
+  }
+
+  private emitTimestamp() {
+    const timestamp = Math.floor(Date.now() / 1000);
+    getContext(this).eventHub.emit('onEmitTimestamp', timestamp);
+  }
+
+  private async deleteAuthenticator(idToRemove: number) {
+    let predicates = new relationalStore.RdbPredicates('authenticator');
+    predicates.equalTo('id', idToRemove);
+    rdbStore.delete(predicates);
+    let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+    await preferences.set('authenticatorSequence', authenticatorSequence.filter(id => id != idToRemove));
+    this.authenticators = await getAuthenticators();
   }
 }

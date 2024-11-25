@@ -1,13 +1,44 @@
 import { AuthenticatorClass } from '../models/AuthenticatorClass'
+import { ConfirmRemoveDialog } from './ConfirmRemoveDialog'
 
 @Component
 export struct AuthenticatorItem {
   @Require @Prop authenticator: AuthenticatorClass
+  @Prop authenticatorId: number;
   @Prop issuer: string;
   @Prop account: string | null;
   @Prop code: string = '';
   @Prop updateInterval: number;
   @Prop timeLeft: number;
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: ConfirmRemoveDialog({
+      confirm: () => { this.deleteAuthenticator(); },
+      authenticatorName: this.issuer
+    }),
+  })
+
+  @Builder
+  itemSwipeOption() {
+    Row({ space: 10 }) {
+      Button() {
+        SymbolGlyph($r('sys.symbol.trash'))
+          .fontColor([Color.White])
+          .fontSize(24)
+      }
+      .type(ButtonType.Circle)
+      .backgroundColor($r('sys.color.warning'))
+      .align(Alignment.Center)
+      .padding(8)
+      .height('100%')
+      .onClick(() => {
+        if (this.dialogController != null) {
+          this.dialogController.open();
+        }
+      })
+    }
+    .height('50%')
+    .margin({ right: 16 })
+  }
 
   build() {
     ListItem() {
@@ -52,9 +83,15 @@ export struct AuthenticatorItem {
         right: 16
       })
     }
+    .swipeAction({
+      end: {
+        builder: () => { this.itemSwipeOption() }
+      }
+    })
   }
 
   aboutToAppear() {
+    this.authenticatorId = this.authenticator.id
     this.issuer = this.authenticator.issuer;
     this.account = this.authenticator.account;
     this.updateInterval = this.authenticator.updateInterval;
@@ -69,7 +106,11 @@ export struct AuthenticatorItem {
     });
   }
 
-  updateTimeLeft(timestamp: number) {
+  aboutToDisappear(): void {
+    this.dialogController = null; // 在即将析构销毁时将 dialogController 置空
+  }
+
+  private updateTimeLeft(timestamp: number) {
     this.timeLeft = this.updateInterval - (timestamp % this.updateInterval);
 
     if (this.timeLeft === this.updateInterval) {
@@ -78,5 +119,9 @@ export struct AuthenticatorItem {
           this.code = code;
         })
     }
+  }
+
+  private deleteAuthenticator() {
+    getContext(this).eventHub.emit('onDeleteAuthenticator', this.authenticatorId);
   }
 }
