@@ -107,6 +107,34 @@
     {
       "name": "LabelledSelect_defaultNoSelectMessage",
       "value": "请选择…"
+    },
+    {
+      "name": "ConfirmRemoveDialog_title",
+      "value": "移除 %s？"
+    },
+    {
+      "name": "ConfirmRemoveDialog_description",
+      "value": "移除此身份验证器不会禁用双因素身份验证。您必须先在提供商的账户设置中禁用验证器，然后再在此处删除。"
+    },
+    {
+      "name": "ConfirmRemoveDialog_verificationCodeDescription_1",
+      "value": "输入验证码 "
+    },
+    {
+      "name": "ConfirmRemoveDialog_verificationCodeDescription_2",
+      "value": " 以确认删除："
+    },
+    {
+      "name": "ConfirmRemoveDialog_codeInputPlaceholder",
+      "value": "输入验证码…"
+    },
+    {
+      "name": "ConfirmRemoveDialog_cancelButton",
+      "value": "取消"
+    },
+    {
+      "name": "ConfirmRemoveDialog_removeButton",
+      "value": "移除"
     }
   ]
 }
