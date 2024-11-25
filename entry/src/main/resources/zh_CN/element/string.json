@@ -114,7 +114,7 @@
     },
     {
       "name": "ConfirmRemoveDialog_description",
-      "value": "移除此身份验证器不会禁用双因素身份验证。您必须先在提供商的账户设置中禁用验证器，然后再在此处删除。"
+      "value": "移除此身份验证器不会禁用双因素身份验证。您必须先在提供商的账户设置中禁用验证器，然后再在此处移除。"
     },
     {
       "name": "ConfirmRemoveDialog_verificationCodeDescription_1",
