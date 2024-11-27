@@ -3,8 +3,8 @@ import router from '@ohos.router';
 import { LabelledSelect } from '../components/LabelledSelect'
 import { LabelledTextInput } from '../components/LabelledTextInput'
 import { promptAction } from '@kit.ArkUI';
-import { RelationalStore } from '../utils/RelationalStore'
-import { Preferences } from '../utils/Preferences'
+import { RelationalStore } from '../models/RelationalStore'
+import { Preferences } from '../models/Preferences'
 import { CancelAddDialog } from '../components/CancelAddDialog'
 import { ValuesBucket } from '@kit.ArkData';
 
