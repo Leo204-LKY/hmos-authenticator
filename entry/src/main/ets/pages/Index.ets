@@ -5,6 +5,8 @@ import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
 import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from '../models/AuthenticatorClass'
 import { AuthenticatorItem } from '../components/AuthenticatorItem'
+import { scanBarcode, scanCore } from '@kit.ScanKit'
+import { BusinessError } from '@kit.BasicServicesKit'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -56,10 +58,21 @@ struct Index {
             {
               value: $r('app.string.addDialog_scanToAdd'),
               action: () => {
-                promptAction.showToast({
-                  message: 'Add by Scan',
-                  duration: 2000
-                })
+                let options: scanBarcode.ScanOptions = {
+                  scanTypes: [scanCore.ScanType.QR_CODE],
+                  enableMultiMode: true,
+                  enableAlbum: true
+                };
+
+                try {
+                  scanBarcode.startScanForResult(getContext(this), options)
+                    .then((result: scanBarcode.ScanResult) => {})
+                    .catch((error: BusinessError) => {
+                      console.log(`Failed to get ScanResult by promise with options. Code:${error.code}, message: ${error.message}`)
+                    })
+                } catch (error) {
+                  console.error(`Failed to start the scanning service. Code:${error.code}, message: ${error.message}`)
+                }
               }
             },
             {
