@@ -100,16 +100,20 @@ struct Index {
   build() {
     Navigation() {
       Scroll() {
-        List({ space: 10 }) {
-          ForEach(this.authenticators, (item: AuthenticatorClass) => {
-              AuthenticatorItem({ authenticator: item })
-          })
+        GridRow({ columns: { sm: 4, md: 8, lg: 12 } }) {
+          GridCol({ span: { sm: 4, md: 6, lg: 8 }, offset: { md: 1, lg: 2 } }) {
+            List({ space: 10 }) {
+              ForEach(this.authenticators, (item: AuthenticatorClass) => {
+                AuthenticatorItem({ authenticator: item })
+              })
+            }
+            .width('100%')
+            .height('100%')
+            .listDirection(Axis.Vertical)
+            .alignListItem(ListItemAlign.Center)
+            .margin({ top: 24 })
+          }
         }
-        .width('100%')
-        .height('100%')
-        .listDirection(Axis.Vertical)
-        .alignListItem(ListItemAlign.Center)
-        .margin({ top: 24 })
       }
       .height('100%')
       .width('100%')
