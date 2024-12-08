@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\likey\\.ohos\\config\\default_hmos-authenticator_z8xFr6Bn1vYEsAXiDGVnfCY2kk8aa0VgaraoJeLvVI8=.cer",
+          "storePassword": "0000001BEAEA8BEF7FE1D80CF64B9C5DE51CBA6CFB5E6C3E69BC4C25D22B498DB375C3BE015441B0FD7DF8",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B1E27BCC7F2A1B0A345260A1B499D6D67451CE8887BA8907B7BFFB85D49B53408816F0F8C2C1CE2",
+          "profile": "C:\\Users\\likey\\.ohos\\config\\default_hmos-authenticator_z8xFr6Bn1vYEsAXiDGVnfCY2kk8aa0VgaraoJeLvVI8=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\likey\\.ohos\\config\\default_hmos-authenticator_z8xFr6Bn1vYEsAXiDGVnfCY2kk8aa0VgaraoJeLvVI8=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
