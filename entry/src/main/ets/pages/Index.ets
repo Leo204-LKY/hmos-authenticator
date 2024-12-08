@@ -7,6 +7,7 @@ import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions 
 import { AuthenticatorItem } from '../components/AuthenticatorItem'
 import { scanBarcode, scanCore } from '@kit.ScanKit'
 import { BusinessError } from '@kit.BasicServicesKit'
+import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -66,7 +67,34 @@ struct Index {
 
                 try {
                   scanBarcode.startScanForResult(getContext(this), options)
-                    .then((result: scanBarcode.ScanResult) => {})
+                    .then((result: scanBarcode.ScanResult) => {
+                      let scanValue = result.originalValue
+                      console.log(`Scan result: ${scanValue}`)
+                      if (scanValue.startsWith('otpauth://totp/')) {
+                        addAuthenticatorFromUrl(scanValue)
+                          .then(() => {
+                            promptAction.showToast({
+                              message: 'Add success',
+                              duration: 2000
+                            })
+                            getAuthenticators()
+                              .then((authenticators) => {
+                                this.authenticators = authenticators;
+                              })
+                              .catch((err: BusinessError) => {
+                                promptAction.showToast({
+                                  message: err.message,
+                                  duration: 2000
+                                })
+                              })
+                          })
+                      } else {  // 非有效的 OTP 二维码
+                        promptAction.showToast({
+                          message: 'Invalid code',
+                          duration: 2000
+                        })
+                      }
+                    })
                     .catch((error: BusinessError) => {
                       console.log(`Failed to get ScanResult by promise with options. Code:${error.code}, message: ${error.message}`)
                     })
