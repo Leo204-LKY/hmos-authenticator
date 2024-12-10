@@ -5,7 +5,7 @@ import { LabelledTextInput } from '../components/LabelledTextInput'
 import { promptAction } from '@kit.ArkUI';
 import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
-import { CancelAddDialog } from '../components/CancelAddDialog'
+import { CancelDialog } from '../components/CancelDialog'
 import { ValuesBucket } from '@kit.ArkData';
 
 const rdbStore = RelationalStore.getInstance();
@@ -37,7 +37,8 @@ struct ManualAddPage {
   @State advancedSettingsVisible: boolean = false;
   @State itemEdited: boolean = false;
   dialogController: CustomDialogController | null = new CustomDialogController({
-    builder: CancelAddDialog({
+    builder: CancelDialog({
+      message: $r('app.string.manualAddPage_confirmCancelMessage'),
       confirm: () => { router.back() }
     }),
   })
