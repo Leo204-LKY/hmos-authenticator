@@ -135,6 +135,18 @@
     {
       "name": "ConfirmRemoveDialog_removeButton",
       "value": "REMOVE"
+    },
+    {
+      "name": "SortPage_title",
+      "value": "Sort"
+    },
+    {
+      "name": "SortPage_hint",
+      "value": "Long press and drag items to sort"
+    },
+    {
+      "name": "SortPage_ConfirmCancelMessage",
+      "value": "You have already sorted the items, confirm cancelling?"
     }
   ]
 }
