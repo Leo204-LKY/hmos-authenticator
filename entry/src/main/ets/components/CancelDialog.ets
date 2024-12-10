@@ -1,19 +1,20 @@
 @Preview
 @CustomDialog
-export struct CancelAddDialog {
+export struct CancelDialog {
+  @Require @Prop message: ResourceStr;
   dialogController?: CustomDialogController;
   confirm: () => void = () => {};
 
   build() {
     Column({ space: 16 }) {
-      Text($r('app.string.CancelAddDialog_title'))
+      Text($r('app.string.CancelDialog_title'))
         .fontSize(20)
         .fontWeight(FontWeight.Bold)
-      Text($r('app.string.CancelAddDialog_description'))
+      Text(this.message)
         .textAlign(TextAlign.Center)
 
       Row() {
-        Button($r('app.string.CancelAddDialog_noButton'))
+        Button($r('app.string.CancelDialog_noButton'))
           .width('100%')
           .buttonStyle(ButtonStyleMode.TEXTUAL)
           .flexShrink(1)
@@ -27,7 +28,7 @@ export struct CancelAddDialog {
           .color($r('sys.color.comp_background_tertiary'))
           .margin({ left: 8, right: 8 })
 
-        Button($r('app.string.CancelAddDialog_yesButton'))
+        Button($r('app.string.CancelDialog_yesButton'))
           .width('100%')
           .buttonStyle(ButtonStyleMode.TEXTUAL)
           .flexShrink(1)

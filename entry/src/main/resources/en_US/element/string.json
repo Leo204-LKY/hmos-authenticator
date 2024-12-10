@@ -85,19 +85,19 @@
       "value": "Currently not supported."
     },
     {
-      "name": "CancelAddDialog_title",
-      "value": "Cancel"
-    },
-    {
-      "name": "CancelAddDialog_description",
+      "name": "manualAddPage_confirmCancelMessage",
       "value": "You have already entered something, confirm cancelling operation?"
     },
     {
-      "name": "CancelAddDialog_yesButton",
+      "name": "CancelDialog_title",
+      "value": "Cancel"
+    },
+    {
+      "name": "CancelDialog_yesButton",
       "value": "YES"
     },
     {
-      "name": "CancelAddDialog_noButton",
+      "name": "CancelDialog_noButton",
       "value": "NO"
     },
     {
