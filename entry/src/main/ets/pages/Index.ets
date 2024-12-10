@@ -7,6 +7,7 @@ import { AuthenticatorClass } from '../models/AuthenticatorClass'
 import { AuthenticatorItem } from '../components/AuthenticatorItem'
 import { scanBarcode, scanCore } from '@kit.ScanKit'
 import { BusinessError } from '@kit.BasicServicesKit'
+import { SortPageParams } from './SortPage'
 import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl'
 import { getAuthenticators } from '../utils/AuthenticatorData'
 
@@ -81,6 +82,14 @@ struct Index {
       value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_search')),
       icon: 'resources/base/media/ic_public_search.svg',
       action: () => {}
+    },
+    {
+      value: 'Sort', // getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_more')),
+      icon: 'resources/base/media/ic_public_view_list.svg',
+      action: () => {
+        let sortPageParams = new SortPageParams(this.authenticators)
+        this.navPathStack.pushPath({ name: 'SortPage', param: sortPageParams })
+      }
     },
     {
       value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_more')),

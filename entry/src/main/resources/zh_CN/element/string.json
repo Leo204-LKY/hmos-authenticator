@@ -135,6 +135,18 @@
     {
       "name": "ConfirmRemoveDialog_removeButton",
       "value": "移除"
+    },
+    {
+      "name": "SortPage_title",
+      "value": "排序"
+    },
+    {
+      "name": "SortPage_hint",
+      "value": "长按并拖拽项目来排序"
+    },
+    {
+      "name": "SortPage_ConfirmCancelMessage",
+      "value": "您已经修改了排序，确认取消？"
     }
   ]
 }
