@@ -110,7 +110,7 @@
     },
     {
       "name": "ConfirmRemoveDialog_title",
-      "value": "移除 %s？"
+      "value": "移除“%s”？"
     },
     {
       "name": "ConfirmRemoveDialog_description",
