@@ -3,7 +3,7 @@ import router from '@ohos.router'
 import relationalStore from '@ohos.data.relationalStore'
 import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
-import { AuthenticatorClass, OtpTypes, OtpAlgorithms, AuthenticatorClassOptions } from '../models/AuthenticatorClass'
+import { AuthenticatorClass } from '../models/AuthenticatorClass'
 import { AuthenticatorItem } from '../components/AuthenticatorItem'
 import { scanBarcode, scanCore } from '@kit.ScanKit'
 import { BusinessError } from '@kit.BasicServicesKit'
@@ -17,6 +17,7 @@ const preferences = Preferences.getInstance();
 @Component
 struct Index {
   @State authenticators: AuthenticatorClass[] = [];
+  @Provide('navPathStack') navPathStack: NavPathStack = new NavPathStack();
 
   private menuItems: Array<NavigationMenuItem> = [
     {
@@ -89,7 +90,7 @@ struct Index {
   ]
 
   build() {
-    Navigation() {
+    Navigation(this.navPathStack) {
       Scroll() {
         GridRow({ columns: { sm: 4, md: 8, lg: 12 } }) {
           GridCol({ span: { sm: 4, md: 6, lg: 8 }, offset: { md: 1, lg: 2 } }) {
