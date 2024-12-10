@@ -1,5 +1,4 @@
 import promptAction from '@ohos.promptAction'
-import router from '@ohos.router'
 import relationalStore from '@ohos.data.relationalStore'
 import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
@@ -70,9 +69,7 @@ struct Index {
             },
             {
               value: $r('app.string.addDialog_manualAdd'),
-              action: () => {
-                router.pushUrl({ url: 'pages/ManualAddPage' })
-              }
+              action: () => { this.navPathStack.pushPath({ name: 'ManualAddPage' })}
             }
           ]
         })
