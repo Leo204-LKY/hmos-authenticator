@@ -8,38 +8,10 @@ import { AuthenticatorItem } from '../components/AuthenticatorItem'
 import { scanBarcode, scanCore } from '@kit.ScanKit'
 import { BusinessError } from '@kit.BasicServicesKit'
 import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl'
+import { getAuthenticators } from '../utils/AuthenticatorData'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
-
-async function getAuthenticators(): Promise<AuthenticatorClass[]> {
-  let predicates: relationalStore.RdbPredicates = new relationalStore.RdbPredicates('authenticator');
-  let queryResult = await rdbStore.getAll(predicates);
-  let authenticators: AuthenticatorClass[] = [];
-  let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
-
-  for (let i = 0; i < authenticatorSequence.length; i++) {
-    for (let j = 0; j < queryResult.length; j++) {
-      if (authenticatorSequence[i] == queryResult[j].id) {
-        let options: AuthenticatorClassOptions = {
-          id: queryResult[j].id as number,
-          issuer: queryResult[j].issuer as string,
-          account: queryResult[j].account as string,
-          secret: queryResult[j].secret as string,
-          protocol: queryResult[j].protocol as OtpTypes,
-          algorithm: queryResult[j].algorithm as OtpAlgorithms,
-          digits: queryResult[j].digits as number,
-          updateInterval: queryResult[j].update_interval as number
-        }
-
-        authenticators.push(new AuthenticatorClass(options));
-        break;
-      }
-    }
-  }
-
-  return authenticators;
-}
 
 @Entry
 @Component
@@ -77,16 +49,7 @@ struct Index {
                               message: 'Add success',
                               duration: 2000
                             })
-                            getAuthenticators()
-                              .then((authenticators) => {
-                                this.authenticators = authenticators;
-                              })
-                              .catch((err: BusinessError) => {
-                                promptAction.showToast({
-                                  message: err.message,
-                                  duration: 2000
-                                })
-                              })
+                            this.updateAuthenticators();
                           })
                       } else {  // 非有效的 OTP 二维码
                         promptAction.showToast({
@@ -162,10 +125,14 @@ struct Index {
   }
 
   onPageShow(): void {
+    this.updateAuthenticators();
+  }
+
+  private updateAuthenticators() {
     getAuthenticators()
-      .then((authenticators) => {
+      .then((authenticators: AuthenticatorClass[]) => {
         this.authenticators = authenticators;
-      });
+      })
   }
 
   private emitTimestamp() {
@@ -179,6 +146,6 @@ struct Index {
     rdbStore.delete(predicates);
     let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
     await preferences.set('authenticatorSequence', authenticatorSequence.filter(id => id != idToRemove));
-    this.authenticators = await getAuthenticators();
+    this.updateAuthenticators();
   }
 }
