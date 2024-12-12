@@ -6,6 +6,7 @@ import { EditableLeftIconType, EditableTitleBar } from '@ohos.arkui.advanced.Edi
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { SortPageAuthenticatorItem } from '../components/SortPageAuthenticatorItem'
 import { Preferences } from '../models/Preferences';
+import { CancelDialog } from '../components/CancelDialog';
 
 const preferences = Preferences.getInstance();
 
@@ -38,6 +39,12 @@ struct SortPage {
   @State offsetY: number = 0;
   @State ITEM_INTV: number = 77;    // ListItem 高度（包含 margin） + 每个 ListItem 间隙的一半
   @State edited: boolean = false;
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: CancelDialog({
+      message: $r('app.string.SortPage_ConfirmCancelMessage'),
+      confirm: () => { this.navPathStack.pop(); }
+    })
+  })
 
   build() {
     NavDestination() {
@@ -45,19 +52,8 @@ struct SortPage {
         EditableTitleBar({
           leftIconStyle: EditableLeftIconType.Cancel,
           title: $r('app.string.SortPage_title'),
-          onSave: () => {
-            let newSequence: number[] = [];
-
-            for (let i = 0; i < this.authenticators.length; i++) {
-              newSequence.push(this.authenticators[i].id)
-            }
-
-            preferences.set('authenticatorSequence', newSequence)
-              .then(() => { this.navPathStack.pop(); })
-          },
-          onCancel: () => {
-            this.navPathStack.pop();
-          }
+          onSave: this.saveOperation,
+          onCancel: this.cancelOperation
         })
 
         Scroll() {
@@ -81,6 +77,7 @@ struct SortPage {
                     offsetX: this.offsetX,
                     offsetY: this.offsetY,
                     ITEM_INTV: this.ITEM_INTV,
+                    edited: this.edited,
                     getItemIndex: this.getItemIndex,
                     getScale: this.getScale,
                     getZIndex: this.getZIndex,
@@ -105,6 +102,7 @@ struct SortPage {
     }
     .hideTitleBar(true)
     .backgroundColor($r('sys.color.gray_01'))
+    .onBackPressed(this.onBackPress)
   }
 
   aboutToAppear(): void {
@@ -138,6 +136,29 @@ struct SortPage {
   itemMove(index: number, newIndex: number): void {
     let tmpAuthenticator = this.authenticators.splice(index, 1);
     this.authenticators.splice(newIndex, 0, tmpAuthenticator[0]);
-    this.edited = true;
+  }
+
+  onBackPress = () => {
+    this.cancelOperation();
+    return true;  // 不进行自动页面路由
+  }
+
+  cancelOperation = () => {
+    if (this.edited) {
+      this.dialogController?.open();
+    } else {
+      this.navPathStack.pop();
+    }
+  }
+
+  saveOperation = async () => {
+    let newSequence: number[] = [];
+
+    for (let i = 0; i < this.authenticators.length; i++) {
+      newSequence.push(this.authenticators[i].id)
+    }
+
+    await preferences.set('authenticatorSequence', newSequence)
+    this.navPathStack.pop();
   }
 }
