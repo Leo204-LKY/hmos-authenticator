@@ -13,6 +13,7 @@ export struct SortPageAuthenticatorItem {
   @Link offsetX: number;
   @Link offsetY: number;
   @Link ITEM_INTV: number;
+  @Link edited: boolean;
   @Require getItemIndex: Function = () => {};
   @Require getScale: Function = () => {};
   @Require getZIndex: Function = () => {};
@@ -106,12 +107,14 @@ export struct SortPageAuthenticatorItem {
                 this.offsetY -= this.ITEM_INTV;
                 this.dragRefOffset += this.ITEM_INTV;
                 this.itemMove(index, index + 1);
+                this.edited = true;
               })
             } else if ((this.offsetY < -this.ITEM_INTV / 2) && (index > 0)) {
               animateTo({ curve: curves.interpolatingSpring(0, 1, 400, 38) }, () => {
                 this.offsetY += this.ITEM_INTV;
                 this.dragRefOffset -= this.ITEM_INTV;
                 this.itemMove(index, index - 1);
+                this.edited = true;
               })
             }
           })
