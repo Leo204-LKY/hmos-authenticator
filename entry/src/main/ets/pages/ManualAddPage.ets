@@ -161,9 +161,10 @@ struct ManualAddPage {
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     }
     .hideTitleBar(true)
+    .onBackPressed(this.onBackPress)
   }
 
-  onBackPress(): boolean | void {
+  onBackPress = () => {
     this.cancelOperation();
     return true;  // 不进行自动页面路由
   }
