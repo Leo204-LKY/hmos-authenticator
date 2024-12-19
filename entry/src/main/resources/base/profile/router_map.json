@@ -9,6 +9,11 @@
       "name": "SortPage",
       "pageSourceFile": "src/main/ets/pages/SortPage.ets",
       "buildFunction": "sortPageBuilder"
+    },
+    {
+      "name": "SettingsPage",
+      "pageSourceFile": "src/main/ets/pages/SettingsPage.ets",
+      "buildFunction": "settingsPageBuilder"
     }
   ]
 }
