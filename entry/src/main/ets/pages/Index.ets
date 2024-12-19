@@ -9,6 +9,8 @@ import { BusinessError } from '@kit.BasicServicesKit'
 import { SortPageParams } from './SortPage'
 import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl'
 import { getAuthenticators } from '../utils/AuthenticatorData'
+import { window } from '@kit.ArkUI'
+import { preferences as prefClass } from '@kit.ArkData'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -18,6 +20,7 @@ const preferences = Preferences.getInstance();
 struct Index {
   @State authenticators: AuthenticatorClass[] = [];
   @Provide('navPathStack') navPathStack: NavPathStack = new NavPathStack();
+  private windowClass = AppStorage.get('windowClass') as window.Window;
 
   private menuItems: Array<NavigationMenuItem> = [
     {
@@ -75,11 +78,11 @@ struct Index {
         })
       }
     },
-    {
-      value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_search')),
-      icon: 'resources/base/media/ic_public_search.svg',
-      action: () => {}
-    },
+    // {
+    //   value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_search')),
+    //   icon: 'resources/base/media/ic_public_search.svg',
+    //   action: () => {}
+    // },
     {
       value: 'Sort', // getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_more')),
       icon: 'resources/base/media/ic_public_view_list.svg',
@@ -89,9 +92,9 @@ struct Index {
       }
     },
     {
-      value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_more')),
-      icon: 'resources/base/media/ic_public_more.svg',
-      action: () => {}
+      value: getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_settings')),
+      icon: 'resources/base/media/gearshape.svg',
+      action: () => { this.navPathStack.pushPath({ name: 'SettingsPage' }) }
     }
   ]
 
@@ -128,7 +131,12 @@ struct Index {
 
   aboutToAppear(): void {
     setInterval(() => { this.emitTimestamp(); }, 1000);
-    getContext(this).eventHub.on('onDeleteAuthenticator', (id: number) => { this.deleteAuthenticator(id); })
+    getContext(this).eventHub.on('onDeleteAuthenticator', (id: number) => { this.deleteAuthenticator(id); });
+    preferences.get('privacyMode', true)
+      .then((value: prefClass.ValueType) => {
+        let privacyMode = value as boolean;
+        this.windowClass.setWindowPrivacyMode(privacyMode);
+      })
   }
 
   onPageShow(): void {
