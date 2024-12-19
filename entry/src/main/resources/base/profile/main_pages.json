@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/ManualAddPage",
-    "pages/SortPage"
+    "pages/SortPage",
+    "pages/SettingsPage"
   ]
 }
