@@ -35,6 +35,11 @@
         ]
       }
     ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.PRIVACY_WINDOW"
+      }
+    ],
     "extensionAbilities": [
       {
         "name": "EntryBackupAbility",
