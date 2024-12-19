@@ -1,7 +1,7 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { relationalStore } from '@kit.ArkData';
+import { preferences, relationalStore } from '@kit.ArkData';
 import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -68,6 +68,10 @@ export default class EntryAbility extends UIAbility {
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+
+    // let privacyMode = this.preferences.getSync('privacyMode', true) as boolean;
+    let windowClass = windowStage.getMainWindowSync();
+    AppStorage.setOrCreate('windowClass', windowClass)
 
     windowStage.loadContent('pages/Index', (err) => {
       if (err.code) {
