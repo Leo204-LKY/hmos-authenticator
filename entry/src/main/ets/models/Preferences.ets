@@ -25,10 +25,23 @@ export class Preferences {
     await this.preferences.flush();
   }
 
+  public setSync(key: string, value: preferences.ValueType) {
+    if (this.preferences == undefined) throw new Error('Preferences not loaded.');
+
+    this.preferences.putSync(key, value);
+    this.preferences.flush();
+  }
+
   public async get(key: string, defaultValue?: preferences.ValueType): Promise<preferences.ValueType> {
     if (this.preferences == undefined) throw new Error('Preferences not loaded.');
 
     return await this.preferences.get(key, defaultValue);
+  }
+
+  public getSync(key: string, defaultValue?: preferences.ValueType): preferences.ValueType {
+    if (this.preferences == undefined) throw new Error('Preferences not loaded.');
+
+    return this.preferences.getSync(key, defaultValue);
   }
 
   public async delete(key: string) {
