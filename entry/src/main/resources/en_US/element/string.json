@@ -25,8 +25,8 @@
       "value": "Search"
     },
     {
-      "name": "mainPageMenu_more",
-      "value": "More"
+      "name": "mainPageMenu_settings",
+      "value": "Settings"
     },
     {
       "name": "addDialog_title",
@@ -147,6 +147,22 @@
     {
       "name": "SortPage_ConfirmCancelMessage",
       "value": "You have already sorted the items, confirm cancelling?"
+    },
+    {
+      "name": "SettingsPage_title",
+      "value": "Settings"
+    },
+    {
+      "name": "SettingsPage_privacyMode",
+      "value": "Privacy Mode"
+    },
+    {
+      "name": "SettingsPage_privacyModeDescription",
+      "value": "Disable screen capturing and recording to increase security"
+    },
+    {
+      "name": "SettingsPage_privacyPolicy",
+      "value": "Privacy Policy"
     }
   ]
 }

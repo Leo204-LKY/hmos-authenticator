@@ -25,8 +25,8 @@
       "value": "搜索"
     },
     {
-      "name": "mainPageMenu_more",
-      "value": "更多"
+      "name": "mainPageMenu_settings",
+      "value": "设置"
     },
     {
       "name": "addDialog_title",
@@ -147,6 +147,22 @@
     {
       "name": "SortPage_ConfirmCancelMessage",
       "value": "您已经修改了排序，确认取消？"
+    },
+    {
+      "name": "SettingsPage_title",
+      "value": "设置"
+    },
+    {
+      "name": "SettingsPage_privacyMode",
+      "value": "隐私模式"
+    },
+    {
+      "name": "SettingsPage_privacyModeDescription",
+      "value": "禁止截取和录制屏幕以提高安全性"
+    },
+    {
+      "name": "SettingsPage_privacyPolicy",
+      "value": "隐私政策"
     }
   ]
 }
