@@ -45,48 +45,56 @@
       "value": "手动输入"
     },
     {
-      "name": "manualAddPage_title",
+      "name": "EditPage_addTitle",
       "value": "添加验证器"
     },
     {
-      "name": "manualAddPage_issuer",
+      "name": "EditPage_editTitle",
+      "value": "编辑“%s”"
+    },
+    {
+      "name": "EditPage_issuer",
       "value": "提供者"
     },
     {
-      "name": "manualAddPage_account",
+      "name": "EditPage_account",
       "value": "账户名称"
     },
     {
-      "name": "manualAddPage_secret",
+      "name": "EditPage_secret",
       "value": "密钥"
     },
     {
-      "name": "manualAddPage_type",
+      "name": "EditPage_type",
       "value": "类型"
     },
     {
-      "name": "manualAddPage_hash",
+      "name": "EditPage_hash",
       "value": "哈希函数"
     },
     {
-      "name": "manualAddPage_interval",
+      "name": "EditPage_interval",
       "value": "更新间隔（秒）"
     },
     {
-      "name": "manualAddPage_digits",
+      "name": "EditPage_digits",
       "value": "位数"
     },
     {
-      "name": "manualAddPage_showAdvancedButton",
+      "name": "EditPage_showAdvancedButton",
       "value": "显示高级设置"
     },
     {
-      "name": "manualAddPage_notSupportToast",
+      "name": "EditPage_notSupportToast",
       "value": "暂不支持修改"
     },
     {
-      "name": "manualAddPage_confirmCancelMessage",
-      "value": "您已经输入了一些内容，确认取消操作？"
+      "name": "EditPage_fillAllFieldsToast",
+      "value": "请填写全部必填字段"
+    },
+    {
+      "name": "EditPage_confirmCancelMessage",
+      "value": "您已经编辑了一些内容，确认取消操作？"
     },
     {
       "name": "CancelDialog_title",

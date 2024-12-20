@@ -45,48 +45,56 @@
       "value": "Manually"
     },
     {
-      "name": "manualAddPage_title",
+      "name": "EditPage_addTitle",
       "value": "Add Authenticator"
     },
     {
-      "name": "manualAddPage_issuer",
+      "name": "EditPage_editTitle",
+      "value": "Edit %s"
+    },
+    {
+      "name": "EditPage_issuer",
       "value": "Issuer"
     },
     {
-      "name": "manualAddPage_account",
+      "name": "EditPage_account",
       "value": "Account"
     },
     {
-      "name": "manualAddPage_secret",
+      "name": "EditPage_secret",
       "value": "Secret"
     },
     {
-      "name": "manualAddPage_type",
+      "name": "EditPage_type",
       "value": "Type"
     },
     {
-      "name": "manualAddPage_hash",
+      "name": "EditPage_hash",
       "value": "Hash"
     },
     {
-      "name": "manualAddPage_interval",
+      "name": "EditPage_interval",
       "value": "Update Interval(s)"
     },
     {
-      "name": "manualAddPage_digits",
+      "name": "EditPage_digits",
       "value": "Digits"
     },
     {
-      "name": "manualAddPage_showAdvancedButton",
+      "name": "EditPage_showAdvancedButton",
       "value": "Show Advanced Settings"
     },
     {
-      "name": "manualAddPage_notSupportToast",
+      "name": "EditPage_notSupportToast",
       "value": "Currently not supported."
     },
     {
-      "name": "manualAddPage_confirmCancelMessage",
-      "value": "You have already entered something, confirm cancelling operation?"
+      "name": "EditPage_fillAllFieldsToast",
+      "value": "Please fill in all required fields."
+    },
+    {
+      "name": "EditPage_confirmCancelMessage",
+      "value": "You have already edited something, confirm cancelling operation?"
     },
     {
       "name": "CancelDialog_title",
