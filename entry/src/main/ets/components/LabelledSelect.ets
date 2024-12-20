@@ -26,7 +26,13 @@ export struct LabelledSelect {
         .selected(this.selectedIndex)
         .value(this.value)
         .enabled(this.selectEnabled)
-        .onSelect(() => { this.onSelect(); })
+        .onSelect((index: number, value?: string) => {
+          this.selectedIndex = index;
+          if (value) {
+            this.value = value;
+          }
+          this.onSelect();
+        })
     }
     .width('100%')
     .alignItems(HorizontalAlign.Start)
