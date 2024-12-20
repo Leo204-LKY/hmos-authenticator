@@ -187,6 +187,14 @@
     {
       "name": "scanAdd_invalidCodeToast",
       "value": "无效的二维码，请重试"
+    },
+    {
+      "name": "EmptyIndexHint_mainText",
+      "value": "没有验证器"
+    },
+    {
+      "name": "EmptyIndexHint_addButtonText",
+      "value": "添加验证器"
     }
   ]
 }
