@@ -1,4 +1,4 @@
-import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { preferences, relationalStore } from '@kit.ArkData';
@@ -59,6 +59,9 @@ export default class EntryAbility extends UIAbility {
         console.error('Error getting preferences: ' + error);
         return;
       });
+
+    // 设置深色模式
+    this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
   }
 
   onDestroy(): void {

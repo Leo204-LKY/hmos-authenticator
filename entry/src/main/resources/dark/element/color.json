@@ -2,35 +2,35 @@
   "color": [
     {
       "name": "start_window_background",
-      "value": "#FFFFFF"
-    },
-    {
-      "name": "background_primary",
-      "value": "#F1F2F3"
-    },
-    {
-      "name": "background_secondary",
-      "value": "#FFFFFF"
-    },
-    {
-      "name": "text_primary",
       "value": "#000000"
     },
     {
+      "name": "background_primary",
+      "value": "#000000"
+    },
+    {
+      "name": "background_secondary",
+      "value": "#191919"
+    },
+    {
+      "name": "text_primary",
+      "value": "#FFFFFF"
+    },
+    {
       "name": "text_secondary",
-      "value": "#666666"
+      "value": "#A3A3A3"
     },
     {
       "name": "text_disabled",
-      "value": "#C7C7CC"
+      "value": "#46484E"
     },
     {
       "name": "divider",
-      "value": "#33000000"
+      "value": "#33FFFFFF"
     },
     {
       "name": "shadow",
-      "value": "#15000000"
+      "value": "#15FFFFFF"
     },
     {
       "name": "white",
@@ -38,7 +38,7 @@
     },
     {
       "name": "warning",
-      "value": "#E84026"
+      "value": "#D94838"
     }
   ]
 }

@@ -101,7 +101,7 @@ struct SortPage {
       }
     }
     .hideTitleBar(true)
-    .backgroundColor($r('sys.color.gray_01'))
+    .backgroundColor($r('app.color.background_primary'))
     .onBackPressed(this.onBackPress)
   }
 

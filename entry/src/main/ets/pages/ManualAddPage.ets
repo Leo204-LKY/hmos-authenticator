@@ -157,7 +157,7 @@ struct ManualAddPage {
       .height('100%')
       .width('100%')
       .alignItems(HorizontalAlign.Start)
-      .backgroundColor($r('sys.color.gray_01'))
+      .backgroundColor($r('app.color.background_primary'))
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     }
     .hideTitleBar(true)

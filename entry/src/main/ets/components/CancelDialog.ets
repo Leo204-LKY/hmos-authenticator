@@ -25,14 +25,14 @@ export struct CancelDialog {
           .height(24)
           .strokeWidth(2)
           .vertical(true)
-          .color($r('sys.color.comp_background_tertiary'))
+          .color($r('app.color.divider'))
           .margin({ left: 8, right: 8 })
 
         Button($r('app.string.CancelDialog_yesButton'))
           .width('100%')
           .buttonStyle(ButtonStyleMode.TEXTUAL)
           .flexShrink(1)
-          .fontColor($r('sys.color.warning'))
+          .fontColor($r('app.color.warning'))
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
             this.dialogController?.close();
