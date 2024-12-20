@@ -24,7 +24,11 @@ export class RelationalStore {
     await this.rdbStore.executeSql(sql, bindArgs);
   }
 
-  public async insert(table: string, values: relationalStore.ValuesBucket, conflict?: relationalStore.ConflictResolution): Promise<number> {
+  public async insert(
+    table: string,
+    values: relationalStore.ValuesBucket,
+    conflict?: relationalStore.ConflictResolution
+  ): Promise<number> {
     if (this.rdbStore == undefined) throw new Error('Relational Database not loaded.');
 
     let rowId: number;
@@ -35,6 +39,16 @@ export class RelationalStore {
     }
 
     return rowId
+  }
+
+  public async update(
+    values: relationalStore.ValuesBucket,
+    predicates: relationalStore.RdbPredicates,
+    conflict?: relationalStore.ConflictResolution
+  ): Promise<void> {
+    if (this.rdbStore == undefined) throw new Error('Relational Database not loaded.');
+
+    await this.rdbStore.update(values, predicates, conflict);
   }
 
   public async delete(predicates: relationalStore.RdbPredicates) {
