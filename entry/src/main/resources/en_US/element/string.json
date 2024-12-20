@@ -10,11 +10,11 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "Authenticator"
+      "value": "AuthKey"
     },
     {
       "name": "mainPage_title",
-      "value": "Authenticator"
+      "value": "AuthKey"
     },
     {
       "name": "mainPageMenu_add",
