@@ -1,7 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/ManualAddPage",
+    "pages/EditPage",
     "pages/SortPage",
     "pages/SettingsPage"
   ]

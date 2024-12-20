@@ -6,6 +6,7 @@ import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
 import { CancelDialog } from '../components/CancelDialog'
 import { ValuesBucket } from '@kit.ArkData';
+import { AuthenticatorClass } from '../models/AuthenticatorClass';
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -21,14 +22,24 @@ const hashOptions: SelectOption[] = [
   { value: 'SHA512' }
 ]
 
+export class EditPageParams {
+  private _authenticator: AuthenticatorClass;
+
+  constructor(authenticator: AuthenticatorClass) {
+    this._authenticator = authenticator
+  }
+
+  get authenticator(): AuthenticatorClass { return this._authenticator; }
+}
+
 @Builder
-export function manualAddPageBuilder() {
-  ManualAddPage()
+export function editPageBuilder() {
+  EditPage()
 }
 
 @Entry
 @Component
-struct ManualAddPage {
+struct EditPage {
   @Consume('navPathStack') navPathStack: NavPathStack;
   @State issuer: string = '';
   @State account: string = '';
@@ -162,6 +173,14 @@ struct ManualAddPage {
     }
     .hideTitleBar(true)
     .onBackPressed(this.onBackPress)
+  }
+
+  aboutToAppear(): void {
+    let sortPageParams = this.navPathStack.getParamByIndex(0) as EditPageParams | null;
+
+    if (sortPageParams) {
+      // TODO: 修改验证器方法
+    }
   }
 
   onBackPress = () => {
