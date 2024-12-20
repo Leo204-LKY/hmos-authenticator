@@ -46,18 +46,23 @@ struct Index {
                     .then((result: scanBarcode.ScanResult) => {
                       let scanValue = result.originalValue
                       console.log(`Scan result: ${scanValue}`)
-                      if (scanValue.startsWith('otpauth://totp/')) {
+                      if (scanValue.toLowerCase().startsWith('otpauth://totp/')) {
                         addAuthenticatorFromUrl(scanValue)
                           .then(() => {
                             promptAction.showToast({
-                              message: 'Add success',
+                              message: $r('app.string.scanAdd_successToast'),
                               duration: 2000
                             })
                             this.updateAuthenticators();
                           })
+                      } else if (scanValue.toLowerCase().startsWith('otpauth://hotp/')) { // TOTP 类型暂不支持
+                        promptAction.showToast({
+                          message: $r('app.string.scanAdd_notSupportToast'),
+                          duration: 3000
+                        })
                       } else {  // 非有效的 OTP 二维码
                         promptAction.showToast({
-                          message: 'Invalid code',
+                          message: $r('app.string.scanAdd_invalidCodeToast'),
                           duration: 2000
                         })
                       }
