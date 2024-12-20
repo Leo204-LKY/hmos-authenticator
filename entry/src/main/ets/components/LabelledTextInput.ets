@@ -27,7 +27,8 @@ export struct LabelledTextInput {
         .showError(this._currentError)
         .border({ width: 2 })
         .borderColor(this._currentError ? $r('app.color.warning') : '#00000000')  // 无错误时设置边框透明
-        .onChange(() => {
+        .onChange((value: string) => {
+          this.text = value;
           if (this.text.length === 0 && this.required) {
             this._currentError = this.errorMessage;
           } else {
