@@ -89,6 +89,10 @@
       "value": "Currently not supported."
     },
     {
+      "name": "EditPage_secretNotEditableToast",
+      "value": "Secret edit is not allowed."
+    },
+    {
       "name": "EditPage_fillAllFieldsToast",
       "value": "Please fill in all required fields."
     },
