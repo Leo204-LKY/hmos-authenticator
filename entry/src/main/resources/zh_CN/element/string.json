@@ -89,6 +89,10 @@
       "value": "暂不支持修改"
     },
     {
+      "name": "EditPage_secretNotEditableToast",
+      "value": "不允许编辑密钥"
+    },
+    {
       "name": "EditPage_fillAllFieldsToast",
       "value": "请填写全部必填字段"
     },
