@@ -50,7 +50,7 @@
     },
     {
       "name": "EditPage_editTitle",
-      "value": "编辑“%s”"
+      "value": "编辑验证器"
     },
     {
       "name": "EditPage_issuer",
@@ -69,8 +69,8 @@
       "value": "类型"
     },
     {
-      "name": "EditPage_hash",
-      "value": "哈希函数"
+      "name": "EditPage_algorithm",
+      "value": "算法"
     },
     {
       "name": "EditPage_interval",
@@ -130,7 +130,7 @@
     },
     {
       "name": "ConfirmRemoveDialog_verificationCodeDescription_2",
-      "value": " 以确认删除："
+      "value": " 以确认移除："
     },
     {
       "name": "ConfirmRemoveDialog_codeInputPlaceholder",
