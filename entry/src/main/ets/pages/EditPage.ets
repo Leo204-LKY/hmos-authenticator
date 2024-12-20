@@ -54,7 +54,7 @@ struct EditPage {
   @State itemEdited: boolean = false;
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CancelDialog({
-      message: $r('app.string.manualAddPage_confirmCancelMessage'),
+      message: $r("app.string.EditPage_confirmCancelMessage"),
       confirm: () => { this.navPathStack.pop() }
     }),
   })
@@ -63,7 +63,7 @@ struct EditPage {
     NavDestination() {
       Column() {
         EditableTitleBar({
-          title: $r('app.string.manualAddPage_title'),
+          title: this.pageTitle,
           onSave: this.saveAuthenticator,
           onCancel: this.cancelOperation
         })
@@ -74,26 +74,26 @@ struct EditPage {
               Column({ space: 10 }) {
                 LabelledTextInput({
                   text: this.issuer,
-                  label: $r('app.string.manualAddPage_issuer'),
+                  label: $r("app.string.EditPage_issuer"),
                   required: true,
                   onChange: this.onItemEdit
                 })
 
                 LabelledTextInput({
                   text: this.account,
-                  label: $r('app.string.manualAddPage_account'),
+                  label: $r("app.string.EditPage_account"),
                   onChange: this.onItemEdit
                 })
 
                 LabelledTextInput({
                   text: this.secret,
-                  label: $r('app.string.manualAddPage_secret'),
+                  label: $r("app.string.EditPage_secret"),
                   inputType: InputType.Password,
                   required: true,
                   onChange: this.onItemEdit
                 })
 
-                Button($r('app.string.manualAddPage_showAdvancedButton'))
+                Button($r("app.string.EditPage_showAdvancedButton"))
                   .alignSelf(ItemAlign.Center)
                   .margin({ top: 20 })
                   .buttonStyle(ButtonStyleMode.NORMAL)
@@ -105,7 +105,7 @@ struct EditPage {
                 Grid() {
                   GridItem() {
                     LabelledSelect({
-                      label: $r('app.string.manualAddPage_type'),
+                      label: $r("app.string.EditPage_type"),
                       selectOption: otpOptions,
                       selectedIndex: this.selectedOTPIndex,
                       value: this.selectedOTPValue,
@@ -115,7 +115,7 @@ struct EditPage {
                       .width('100%')
                       .onClick(() => {
                         promptAction.showToast({
-                          message: $r('app.string.manualAddPage_notSupportToast'),
+                          message: $r("app.string.EditPage_notSupportToast"),
                           duration: 2000
                         })
                       })
@@ -123,7 +123,7 @@ struct EditPage {
 
                   GridItem() {
                     LabelledSelect({
-                      label: $r('app.string.manualAddPage_hash'),
+                      label: $r("app.string.EditPage_hash"),
                       selectOption: hashOptions,
                       selectedIndex: this.selectedHashIndex,
                       value: this.selectedHashValue,
@@ -136,7 +136,7 @@ struct EditPage {
                     LabelledTextInput({
                       text: this.updateInterval,
                       inputType: InputType.Number,
-                      label: $r('app.string.manualAddPage_interval'),
+                      label: $r("app.string.EditPage_interval"),
                       required: true,
                       onChange: this.onItemEdit
                     })
@@ -146,7 +146,7 @@ struct EditPage {
                     LabelledTextInput({
                       text: this.digits,
                       inputType: InputType.Number,
-                      label: $r('app.string.manualAddPage_digits'),
+                      label: $r("app.string.EditPage_digits"),
                       required: true,
                       onChange: this.onItemEdit
                     })
@@ -179,7 +179,6 @@ struct EditPage {
     let sortPageParams = this.navPathStack.getParamByIndex(0) as EditPageParams | null;
 
     if (sortPageParams) {
-      // TODO: 修改验证器方法
     }
   }
 
@@ -199,7 +198,7 @@ struct EditPage {
   saveAuthenticator = async () => {
     if (this.issuer.length == 0 || this.secret.length == 0 || this.updateInterval.length == 0 || this.digits.length == 0) {
       promptAction.showToast({
-        message: 'Please fill in all required fields',
+        message: $r('app.string.EditPage_fillAllFieldsToast'),
         duration: 2000
       })
     } else {
