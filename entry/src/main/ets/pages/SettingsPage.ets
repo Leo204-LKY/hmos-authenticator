@@ -30,10 +30,10 @@ struct SettingsPage {
                 onChange: this.onPrivacyModeChange
               })
             }
-            .backgroundColor('white')
+            .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
             .padding({ left: 16, right: 16})
-            .divider({ strokeWidth: 1, color: '#d2d2d2' })
+            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
 
             ListItemGroup() {
               ListItem() {
@@ -50,10 +50,10 @@ struct SettingsPage {
                 context.startAbility(want);
               })
             }
-            .backgroundColor('white')
+            .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
             .padding({ left: 16, right: 16})
-            .divider({ strokeWidth: 1, color: '#d2d2d2' })
+            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
           }
         }
         .margin({ left: 16, right: 16 })
@@ -64,7 +64,7 @@ struct SettingsPage {
       .edgeEffect(EdgeEffect.Spring)
     }
     .title(getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_settings')))
-    .backgroundColor($r('sys.color.gray_01'))
+    .backgroundColor($r('app.color.background_primary'))
   }
 
   aboutToAppear(): void {

@@ -125,7 +125,7 @@ struct Index {
     .width('100%')
     .title($r('app.string.mainPage_title'))
     .menus(this.menuItems)
-    .backgroundColor($r('sys.color.gray_01'))
+    .backgroundColor($r('app.color.background_primary'))
     .mode(NavigationMode.Stack)
   }
 

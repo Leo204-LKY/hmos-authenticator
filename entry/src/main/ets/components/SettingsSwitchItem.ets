@@ -14,7 +14,7 @@ export struct SettingsSwitchItem {
             .width('100%')
           Text(this.description)
             .width('100%')
-            .fontColor('#666')
+            .fontColor($r('app.color.text_secondary'))
             .fontSize(14)
         }
         .alignItems(HorizontalAlign.Start)

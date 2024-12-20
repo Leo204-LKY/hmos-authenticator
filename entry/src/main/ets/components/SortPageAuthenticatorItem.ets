@@ -42,13 +42,13 @@ export struct SortPageAuthenticatorItem {
 
           Image($r('app.media.ic_public_drag_handle'))
             .size({ width: 24, height: 24 })
-            .fillColor('primary')
+            .fillColor($r('app.color.text_primary'))
             .draggable(false)
         }
       }
     }
     .height(72)
-    .backgroundColor($r('sys.color.white'))
+    .backgroundColor($r('app.color.background_secondary'))
     .borderRadius(16)
     .padding({
       left: 16,
@@ -62,7 +62,7 @@ export struct SortPageAuthenticatorItem {
     .translate({ y: (this.dragItem?.id === this.authenticatorId) ? this.offsetY : 0 })
     .shadow({
       radius: (this.dragItem?.id == this.authenticatorId) ? 70 : 0,
-      color: '#15000000'
+      color: $r("app.color.shadow")
     })
     .gesture(
       GestureGroup(

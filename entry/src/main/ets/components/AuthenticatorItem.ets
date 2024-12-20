@@ -22,11 +22,11 @@ export struct AuthenticatorItem {
     Row({ space: 10 }) {
       Button() {
         SymbolGlyph($r('sys.symbol.trash'))
-          .fontColor([Color.White])
+          .fontColor([$r('app.color.white')])
           .fontSize(24)
       }
       .type(ButtonType.Circle)
-      .backgroundColor($r('sys.color.warning'))
+      .backgroundColor($r('app.color.warning'))
       .align(Alignment.Center)
       .padding(8)
       .height('100%')
@@ -70,7 +70,7 @@ export struct AuthenticatorItem {
           .height(4)
           .value(this.timeLeft)
       }
-      .backgroundColor('white')
+      .backgroundColor($r('app.color.background_secondary'))
       .borderRadius(16)
       .padding({
         left: 16,

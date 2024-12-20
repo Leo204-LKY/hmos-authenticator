@@ -17,7 +17,7 @@ export struct LabelledTextInput {
     Column({ space: 5 }) {
       Text(this.label)
         .offset({ left: 16, right: 16 })
-        .fontColor(this.inputEnabled ? 'primary' : $r('sys.color.gray_04'))
+        .fontColor(this.inputEnabled ? $r('app.color.text_primary') : $r('app.color.text_disabled'))
       TextInput({ placeholder: this.placeholder, text: $$this.text })
         .width('100%')
         .type(this.inputType)
@@ -26,7 +26,7 @@ export struct LabelledTextInput {
         .enterKeyType(this.enterKeyType)
         .showError(this._currentError)
         .border({ width: 2 })
-        .borderColor(this._currentError ? $r('sys.color.warning') : '#0000')  // 无错误时设置边框透明
+        .borderColor(this._currentError ? $r('app.color.warning') : '#00000000')  // 无错误时设置边框透明
         .onChange(() => {
           if (this.text.length === 0 && this.required) {
             this._currentError = this.errorMessage;
