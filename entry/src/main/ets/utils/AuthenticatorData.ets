@@ -29,7 +29,7 @@ async function getUnorderedAuthenticators(): Promise<AuthenticatorData> {
         issuer: queryResult[i].issuer as string,
         account: queryResult[i].account as string,
         secret: queryResult[i].secret as string,
-        protocol: queryResult[i].protocol as OtpTypes,
+        otpType: queryResult[i].protocol as OtpTypes,
         algorithm: queryResult[i].algorithm as OtpAlgorithms,
         digits: queryResult[i].digits as number,
         updateInterval: queryResult[i].update_interval as number

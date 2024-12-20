@@ -9,7 +9,7 @@ export interface AuthenticatorClassOptions {
   secret: string;
   account?: string;
   algorithm?: OtpAlgorithms;
-  protocol?: OtpTypes;
+  otpType?: OtpTypes;
   digits?: number;
   updateInterval?: number
 }
@@ -19,7 +19,7 @@ export class AuthenticatorClass {
   private _issuer: string;                    // 发行者
   private _account: string | null = null;     // 账号，如邮箱
   private _secret: string;                    // 密钥，通常为 16 位
-  private _protocol: OtpTypes = 'TOTP';       // 密钥更新协议，默认/常用为 TOTP，暂不支持 HOTP）
+  private _otpType: OtpTypes = 'TOTP';        // 密钥更新协议，默认/常用为 TOTP，暂不支持 HOTP）
   private _algorithm: OtpAlgorithms = 'SHA1'; // 密钥生成算法，默认/常用为 SHA1
   private _digits: number = 6;                // OTP 位数，默认/常用为 6 位
   private _updateInterval: number = 30;       // 更新周期，默认 30s
@@ -30,7 +30,7 @@ export class AuthenticatorClass {
     this._secret = options.secret;
     if (options.account) this._account = options.account;
     if (options.algorithm) this._algorithm = options.algorithm;
-    if (options.protocol) this._protocol = options.protocol;
+    if (options.otpType) this._otpType = options.otpType;
     if (options.digits) this._digits = options.digits;
     if (options.updateInterval) this._updateInterval = options.updateInterval;
   }
@@ -38,6 +38,8 @@ export class AuthenticatorClass {
   get id(): number { return this._id; }
   get issuer(): string { return this._issuer; }
   get account(): string | null { return this._account; }
+  get otpType(): OtpTypes { return this._otpType; }
+  get algorithm(): OtpAlgorithms { return this._algorithm; }
   get digits(): number { return this._digits; }
   get updateInterval(): number { return this._updateInterval; }
 
