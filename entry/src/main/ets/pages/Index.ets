@@ -11,6 +11,7 @@ import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl'
 import { getAuthenticators } from '../utils/AuthenticatorData'
 import { window } from '@kit.ArkUI'
 import { preferences as prefClass } from '@kit.ArkData'
+import { EmptyIndexHint } from '../components/EmptyIndexHint'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -106,24 +107,28 @@ struct Index {
   build() {
     Navigation(this.navPathStack) {
       Scroll() {
-        GridRow({ columns: { sm: 4, md: 8, lg: 12 } }) {
-          GridCol({ span: { sm: 4, md: 6, lg: 8 }, offset: { md: 1, lg: 2 } }) {
-            List({ space: 10 }) {
-              ForEach(this.authenticators, (item: AuthenticatorClass) => {
-                AuthenticatorItem({ authenticator: item })
-              })
+        if (this.authenticators.length == 0) {
+          EmptyIndexHint()
+        } else {
+          GridRow({ columns: { sm: 4, md: 8, lg: 12 } }) {
+            GridCol({ span: { sm: 4, md: 6, lg: 8 }, offset: { md: 1, lg: 2 } }) {
+              List({ space: 10 }) {
+                ForEach(this.authenticators, (item: AuthenticatorClass) => {
+                  AuthenticatorItem({ authenticator: item })
+                })
+              }
+              .width('100%')
+              .height('100%')
+              .listDirection(Axis.Vertical)
+              .alignListItem(ListItemAlign.Center)
+              .margin({ top: 24 })
             }
-            .width('100%')
-            .height('100%')
-            .listDirection(Axis.Vertical)
-            .alignListItem(ListItemAlign.Center)
-            .margin({ top: 24 })
           }
         }
       }
       .height('100%')
       .width('100%')
-      .align(Alignment.Top)
+      .align(this.authenticators.length == 0 ? Alignment.Center : Alignment.Top)
       .edgeEffect(EdgeEffect.Spring)
     }
     .height('100%')
