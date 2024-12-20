@@ -77,7 +77,7 @@ struct Index {
             },
             {
               value: $r('app.string.addDialog_manualAdd'),
-              action: () => { this.navPathStack.pushPath({ name: 'ManualAddPage' })}
+              action: () => { this.navPathStack.pushPath({ name: 'EditPage' })}
             }
           ]
         })
