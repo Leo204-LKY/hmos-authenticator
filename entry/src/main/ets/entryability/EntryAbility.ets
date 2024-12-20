@@ -12,7 +12,7 @@ const storeConfig: relationalStore.StoreConfig = {
 };
 
 const tableCreationQuery: string = 'CREATE TABLE IF NOT EXISTS authenticator (' +
-  'id INTEGER PRIMARY KEY AUTOINCREMRNT, ' +
+  'id INTEGER PRIMARY KEY, ' +
   'issuer TEXT NOT NULL, ' +
   'account TEXT DEFAULT NULL, ' +
   'secret TEXT NOT NULL, ' +
