@@ -163,6 +163,18 @@
     {
       "name": "SettingsPage_privacyPolicy",
       "value": "隐私政策"
+    },
+    {
+      "name": "scanAdd_successToast",
+      "value": "成功添加验证器"
+    },
+    {
+      "name": "scanAdd_notSupportToast",
+      "value": "暂不支持 HOTP 类型，请重试添加 TOTP 类型的验证器"
+    },
+    {
+      "name": "scanAdd_invalidCodeToast",
+      "value": "无效的二维码，请重试"
     }
   ]
 }

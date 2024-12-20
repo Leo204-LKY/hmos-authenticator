@@ -163,6 +163,18 @@
     {
       "name": "SettingsPage_privacyPolicy",
       "value": "Privacy Policy"
+    },
+    {
+      "name": "scanAdd_successToast",
+      "value": "Successfully added authenticator."
+    },
+    {
+      "name": "scanAdd_notSupportToast",
+      "value": "HOTP is not supported currently, try a TOTP code."
+    },
+    {
+      "name": "scanAdd_invalidCodeToast",
+      "value": "Invalid QR code, please try again."
     }
   ]
 }
