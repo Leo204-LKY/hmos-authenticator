@@ -135,8 +135,10 @@ struct Index {
   }
 
   aboutToAppear(): void {
+    this.updateAuthenticators();
     setInterval(() => { this.emitTimestamp(); }, 1000);
     getContext(this).eventHub.on('onDeleteAuthenticator', (id: number) => { this.deleteAuthenticator(id); });
+    getContext(this).eventHub.on('onUpdateAuthenticators', () => { this.updateAuthenticators(); })
     preferences.get('privacyMode', true)
       .then((value: prefClass.ValueType) => {
         let privacyMode = value as boolean;
@@ -144,16 +146,12 @@ struct Index {
       })
   }
 
-  onPageShow(): void {
-    this.updateAuthenticators();
-  }
-
-  private updateAuthenticators() {
+  updateAuthenticators: Function = () => {
     getAuthenticators()
       .then((authenticators: AuthenticatorClass[]) => {
         this.authenticators = authenticators;
       })
-  }
+  };
 
   private emitTimestamp() {
     const timestamp = Math.floor(Date.now() / 1000);

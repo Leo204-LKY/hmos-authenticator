@@ -1,8 +1,10 @@
 import { AuthenticatorClass } from '../models/AuthenticatorClass'
+import { EditPageParams } from '../pages/EditPage';
 import { ConfirmRemoveDialog } from './ConfirmRemoveDialog'
 
 @Component
 export struct AuthenticatorItem {
+  @Consume('navPathStack') navPathStack: NavPathStack;
   @Require @Prop authenticator: AuthenticatorClass
   @Prop authenticatorId: number;
   @Prop issuer: string;
@@ -20,6 +22,20 @@ export struct AuthenticatorItem {
   @Builder
   itemSwipeOption() {
     Row({ space: 10 }) {
+      Button() {
+        SymbolGlyph($r('sys.symbol.square_and_pencil'))
+          .fontColor([$r('app.color.text_primary')])
+          .fontSize(24)
+      }
+      .type(ButtonType.Circle)
+      .backgroundColor($r('app.color.background_secondary'))
+      .align(Alignment.Center)
+      .padding(8)
+      .height('100%')
+      .onClick(() => {
+        this.navPathStack.pushPath({ name: 'EditPage', param: new EditPageParams(this.authenticator) })
+      })
+
       Button() {
         SymbolGlyph($r('sys.symbol.trash'))
           .fontColor([$r('app.color.white')])
