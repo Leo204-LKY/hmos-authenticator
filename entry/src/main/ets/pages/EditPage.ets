@@ -1,10 +1,10 @@
 import { EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar';
-import { LabelledSelect } from '../components/LabelledSelect'
-import { LabelledTextInput } from '../components/LabelledTextInput'
-import { promptAction, SelectOptions } from '@kit.ArkUI';
-import { RelationalStore } from '../models/RelationalStore'
-import { Preferences } from '../models/Preferences'
-import { CancelDialog } from '../components/CancelDialog'
+import { LabelledSelect } from '../components/LabelledSelect';
+import { LabelledTextInput } from '../components/LabelledTextInput';
+import { promptAction } from '@kit.ArkUI';
+import { RelationalStore } from '../models/RelationalStore';
+import { Preferences } from '../models/Preferences';
+import { CancelDialog } from '../components/CancelDialog';
 import { relationalStore, ValuesBucket } from '@kit.ArkData';
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
 

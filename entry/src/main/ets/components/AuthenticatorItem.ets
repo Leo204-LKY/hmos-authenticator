@@ -1,6 +1,6 @@
-import { AuthenticatorClass } from '../models/AuthenticatorClass'
+import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { EditPageParams } from '../pages/EditPage';
-import { ConfirmRemoveDialog } from './ConfirmRemoveDialog'
+import { ConfirmRemoveDialog } from './ConfirmRemoveDialog';
 
 @Component
 export struct AuthenticatorItem {

@@ -1,9 +1,9 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { preferences, relationalStore } from '@kit.ArkData';
-import { RelationalStore } from '../models/RelationalStore'
-import { Preferences } from '../models/Preferences'
+import { relationalStore } from '@kit.ArkData';
+import { RelationalStore } from '../models/RelationalStore';
+import { Preferences } from '../models/Preferences';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 const storeConfig: relationalStore.StoreConfig = {

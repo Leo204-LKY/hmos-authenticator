@@ -1,5 +1,5 @@
 import url from '@ohos.url';
-import { AuthenticatorClassOptions, OtpAlgorithms } from '../models/AuthenticatorClass';
+import { OtpAlgorithms } from '../models/AuthenticatorClass';
 import { Preferences } from '../models/Preferences';
 import { ValuesBucket } from '@kit.ArkData';
 import { RelationalStore } from '../models/RelationalStore';

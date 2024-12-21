@@ -1,5 +1,5 @@
 import { common } from '@kit.AbilityKit';
-import { relationalStore, ValueType } from "@kit.ArkData";
+import { relationalStore, ValueType } from '@kit.ArkData';
 
 export class RelationalStore {
   private static instance: RelationalStore;
