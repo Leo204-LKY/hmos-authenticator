@@ -50,6 +50,8 @@ struct IndexNavMenu {
         message: $r('app.string.mainPageMenu_noAuthenticatorToast'),
         duration: 3000
       })
+    } else {
+      this.navPathStack.pushPath({ name: 'SortPage' })
     }
   }
 
