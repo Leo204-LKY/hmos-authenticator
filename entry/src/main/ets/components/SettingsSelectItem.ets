@@ -2,15 +2,13 @@
 export struct SettingsSelectItem {
   @Require @Prop title: ResourceStr;
   @Prop description: ResourceStr = '';
-  @Require @Prop optionMaps: Map<ResourceStr, string>;
+  @Require @Prop optionsText: ResourceStr[];
   @Link selectedIndex: number;
   @Prop value: ResourceStr;
   onSelect = (_: number) => {}
 
-  private optionKeys = Array.from(this.optionMaps.keys());
-  private optionValues = Array.from(this.optionMaps.values());
-  private selectOption = this.optionKeys.map(key => {
-    return { value: key } as SelectOption
+  private selectOption = this.optionsText.map(text => {
+    return { value: text } as SelectOption
   })
 
   build() {
@@ -30,6 +28,7 @@ export struct SettingsSelectItem {
         .layoutWeight(1)
 
         Select(this.selectOption)
+          .fontColor($r('app.color.text_secondary'))
           .backgroundColor($r('app.color.background_secondary'))
           .menuAlign(MenuAlignType.END)
           .borderRadius(12)
