@@ -15,7 +15,7 @@ const preferences = Preferences.getInstance();
 @Entry
 @Component
 struct Index {
-  @State authenticators: AuthenticatorClass[] = [];
+  @Provide('authenticators') authenticators: AuthenticatorClass[] = [];
   @Provide('navPathStack') navPathStack: NavPathStack = new NavPathStack();
   private windowClass = AppStorage.get('windowClass') as window.Window;
 
