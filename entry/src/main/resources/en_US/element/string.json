@@ -173,12 +173,32 @@
       "value": "Settings"
     },
     {
+      "name": "SettingsPage_securityHeader",
+      "value": "Security"
+    },
+    {
+      "name": "SettingsPage_appearanceHeader",
+      "value": "Appearance"
+    },
+    {
+      "name": "SettingsPage_aboutHeader",
+      "value": "About"
+    },
+    {
       "name": "SettingsPage_privacyMode",
       "value": "Privacy Mode"
     },
     {
       "name": "SettingsPage_privacyModeDescription",
       "value": "Disable screen capturing and recording to increase security"
+    },
+    {
+    "name": "SettingsPage_language",
+    "value": "Language"
+    },
+    {
+      "name": "language_default",
+      "value": "System default"
     },
     {
       "name": "SettingsPage_privacyPolicy",

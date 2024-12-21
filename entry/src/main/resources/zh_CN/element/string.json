@@ -173,12 +173,32 @@
       "value": "设置"
     },
     {
+      "name": "SettingsPage_securityHeader",
+      "value": "安全"
+    },
+    {
+      "name": "SettingsPage_appearanceHeader",
+      "value": "外观"
+    },
+    {
+      "name": "SettingsPage_aboutHeader",
+      "value": "关于"
+    },
+    {
       "name": "SettingsPage_privacyMode",
       "value": "隐私模式"
     },
     {
       "name": "SettingsPage_privacyModeDescription",
       "value": "禁止截取和录制屏幕以提高安全性"
+    },
+    {
+      "name": "SettingsPage_language",
+      "value": "语言/Language"
+    },
+    {
+      "name": "language_default",
+      "value": "系统默认"
     },
     {
       "name": "SettingsPage_privacyPolicy",
