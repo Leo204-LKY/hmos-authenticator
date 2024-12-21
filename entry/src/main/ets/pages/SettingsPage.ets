@@ -2,9 +2,19 @@ import Want from '@ohos.app.ability.Want';
 import { common } from '@kit.AbilityKit';
 import { SettingsSwitchItem } from '../components/SettingsSwitchItem';
 import { Preferences } from '../models/Preferences';
-import { window } from '@kit.ArkUI';
+import { ComposeTitleBar, EditableTitleBar, window } from '@kit.ArkUI';
+import { ListItemGroupHeader } from '../components/ListItemGroupHeader';
+import { SettingsSelectItem } from '../components/SettingsSelectItem';
+import { i18n } from '@kit.LocalizationKit';
 
 const preferences = Preferences.getInstance();
+
+
+const languageMap: Map<ResourceStr, string> = new Map<ResourceStr, string>([
+  [$r('app.string.language_default'), 'default'],
+  ['简体中文', 'zh-Hans-CN'],
+  ['English', 'en-Latn-US']
+])
 
 @Builder
 export function settingsPageBuilder() {
@@ -14,14 +24,30 @@ export function settingsPageBuilder() {
 @Entry
 @Component
 struct SettingsPage {
+  @Consume('navPathStack') navPathStack: NavPathStack
   @State privacyMode: boolean = false;
+  @State selectedLanguageIndex: number = -1;
+  @State selectedLanguageValue: ResourceStr = '';
+  @State selectedDarkModeIndex: number = -1;
+  @State selectedDarkModeValue: ResourceStr = '';
+  @State currentPreferredLanguage: string = 'default';
   private windowClass = AppStorage.get('windowClass') as window.Window;
 
   build() {
     NavDestination() {
+      Column() {
+        EditableTitleBar({
+          title: $r('app.string.SettingsPage_title'),
+          onCancel: () => { this.navPathStack.pop(); },
+          isSaveIconRequired: false
+        })
+      }
+
       Scroll() {
         Column() {
-          List({ space: 16 }) {
+          List() {
+            // 安全
+            ListItemGroupHeader({ text: $r('app.string.SettingsPage_securityHeader') })
             ListItemGroup() {
               SettingsSwitchItem({
                 title: $r('app.string.SettingsPage_privacyMode'),
@@ -35,6 +61,24 @@ struct SettingsPage {
             .padding({ left: 16, right: 16})
             .divider({ strokeWidth: 1, color: $r('app.color.divider') })
 
+            // 外观
+            ListItemGroupHeader({ text: $r('app.string.SettingsPage_appearanceHeader') })
+            ListItemGroup() {
+              SettingsSelectItem({
+                title: $r('app.string.SettingsPage_language'),
+                optionMaps: languageMap,
+                selectedIndex: this.selectedLanguageIndex,
+                onSelect: this.onLanguageChange,
+                value: this.selectedLanguageValue
+              })
+            }
+            .backgroundColor($r('app.color.background_secondary'))
+            .borderRadius(16)
+            .padding({ left: 16, right: 16})
+            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
+
+            // 关于
+            ListItemGroupHeader({ text: $r('app.string.SettingsPage_aboutHeader') })
             ListItemGroup() {
               ListItem() {
                 Text($r('app.string.SettingsPage_privacyPolicy'))
@@ -63,12 +107,20 @@ struct SettingsPage {
       .align(Alignment.Top)
       .edgeEffect(EdgeEffect.Spring)
     }
-    .title(getContext(this).resourceManager.getStringSync($r('app.string.mainPageMenu_settings')))
+    .hideTitleBar(true)
     .backgroundColor($r('app.color.background_primary'))
   }
 
   aboutToAppear(): void {
-    this.privacyMode = preferences.getSync('privacyMode', true) as boolean;
+    preferences.get('privacyMode', true)
+      .then((privacyMode) => {
+        this.privacyMode = privacyMode as boolean;
+      });
+
+    let preferredLanguage = i18n.System.getAppPreferredLanguage();
+    this.currentPreferredLanguage = preferredLanguage
+    this.selectedLanguageIndex = Array.from(languageMap.values()).indexOf(preferredLanguage);
+    this.selectedLanguageValue = Array.from(languageMap.keys())[this.selectedLanguageIndex];
   }
 
   onPrivacyModeChange = (isOn: boolean) => {
@@ -76,5 +128,18 @@ struct SettingsPage {
     this.privacyMode = isOn;
     preferences.setSync('privacyMode', this.privacyMode);
     this.windowClass.setWindowPrivacyMode(isOn);
+  }
+
+  onLanguageChange = (index: number) => {
+    let newPreferredLanguage = Array.from(languageMap.values())[index];
+    console.log('Setting language to ' + newPreferredLanguage);
+    if (this.currentPreferredLanguage != newPreferredLanguage) {
+      if (newPreferredLanguage == 'default') {
+        // 设置为系统默认语言的操作会在重启 App 后生效，因此先设置一次语言
+        i18n.System.setAppPreferredLanguage(i18n.System.getSystemLanguage())
+      }
+      i18n.System.setAppPreferredLanguage(newPreferredLanguage);
+      this.currentPreferredLanguage = newPreferredLanguage;
+    }
   }
 }
