@@ -7,6 +7,7 @@ import { EditableTitleBar, window } from '@kit.ArkUI';
 import { ListItemGroupHeader } from '../components/ListItemGroupHeader';
 import { SettingsSelectItem } from '../components/SettingsSelectItem';
 import { i18n } from '@kit.LocalizationKit';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 const preferences = Preferences.getInstance();
 
@@ -126,18 +127,18 @@ struct SettingsPage {
   }
 
   aboutToAppear(): void {
-    preferences.get('privacyMode', true)
+    preferences.get(PreferenceConstants.PRIVACY_MODE, true)
       .then((privacyMode) => {
         this.privacyMode = privacyMode as boolean;
       });
 
-    preferences.get('colorMode', ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
+    preferences.get(PreferenceConstants.COLOR_MODE, ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
       .then((colorMode) => {
         this.selectedColorModeIndex = Array.from(colorModeMap.values()).indexOf(colorMode as ConfigurationConstant.ColorMode);
         this.selectedColorModeValue = Array.from(colorModeMap.keys())[this.selectedColorModeIndex];
       });
 
-    preferences.get('prefLanguage', 'default')
+    preferences.get(PreferenceConstants.PREFERENCE_LANGUAGE, 'default')
       .then((prefLanguage) => {
         this.currentPreferredLanguage = prefLanguage as string;
         this.selectedLanguageIndex = Array.from(languageMap.values()).indexOf(prefLanguage as string);
@@ -148,7 +149,7 @@ struct SettingsPage {
   onPrivacyModeChange = (isOn: boolean) => {
     console.log('isOn' + isOn)
     this.privacyMode = isOn;
-    preferences.setSync('privacyMode', this.privacyMode);
+    preferences.setSync(PreferenceConstants.PRIVACY_MODE, this.privacyMode);
     this.windowClass.setWindowPrivacyMode(isOn);
   }
 
@@ -162,13 +163,13 @@ struct SettingsPage {
       }
       i18n.System.setAppPreferredLanguage(newPreferredLanguage);
       this.currentPreferredLanguage = newPreferredLanguage;
-      preferences.set('prefLanguage', newPreferredLanguage);
+      preferences.set(PreferenceConstants.PREFERENCE_LANGUAGE, newPreferredLanguage);
     }
   }
 
   onColorModeChange = (index: number) => {
     let newColorMode = Array.from(colorModeMap.values())[index];
-    preferences.set('colorMode', newColorMode)
+    preferences.set(PreferenceConstants.COLOR_MODE, newColorMode)
       .then(() => {
         this.appContext.setColorMode(newColorMode);
       });

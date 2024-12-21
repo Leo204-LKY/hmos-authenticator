@@ -3,6 +3,7 @@ import { OtpAlgorithms } from '../models/AuthenticatorClass';
 import { Preferences } from '../models/Preferences';
 import { ValuesBucket } from '@kit.ArkData';
 import { RelationalStore } from '../models/RelationalStore';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 // otpauth://totp/Issuer:account?secret=OTPSECRET2345678&issuer=Issuer
 
@@ -37,7 +38,7 @@ export async function addAuthenticatorFromUrl(otpUrl: string) {
     throw new Error('Secret is required in the URL.')
   }
 
-  let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+  let authenticatorSequence = await preferences.get(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[];
   let values: ValuesBucket = {
     issuer: issuer,
     account: account,
@@ -52,6 +53,6 @@ export async function addAuthenticatorFromUrl(otpUrl: string) {
 
   if (rowId != -1) {
     authenticatorSequence.push(rowId);
-    preferences.set('authenticatorSequence', authenticatorSequence);
+    preferences.set(PreferenceConstants.AUTHENTICATOR_SEQUENCE, authenticatorSequence);
   }
 }

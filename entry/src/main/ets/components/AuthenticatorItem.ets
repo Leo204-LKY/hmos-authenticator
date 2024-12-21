@@ -1,4 +1,5 @@
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
+import { EventConstants } from '../models/EventConstants';
 import { EditPageParams } from '../pages/EditPage';
 import { ConfirmRemoveDialog } from './ConfirmRemoveDialog';
 
@@ -117,7 +118,7 @@ export struct AuthenticatorItem {
       })
     this.updateTimeLeft(Math.floor(Date.now() / 1000))
 
-    getContext(this).eventHub.on('onEmitTimestamp', (timestamp: number) => {
+    getContext(this).eventHub.on(EventConstants.ON_EMIT_TIMESTAMP, (timestamp: number) => {
       this.updateTimeLeft(timestamp)
     });
   }
@@ -138,6 +139,6 @@ export struct AuthenticatorItem {
   }
 
   private deleteAuthenticator() {
-    getContext(this).eventHub.emit('onDeleteAuthenticator', this.authenticatorId);
+    getContext(this).eventHub.emit(EventConstants.ON_DELETE_AUTHENTICATOR, this.authenticatorId);
   }
 }

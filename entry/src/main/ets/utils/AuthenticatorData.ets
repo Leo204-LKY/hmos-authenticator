@@ -2,6 +2,7 @@ import { AuthenticatorClass, AuthenticatorClassOptions, OtpAlgorithms, OtpTypes 
 import { RelationalStore } from '../models/RelationalStore';
 import { Preferences } from '../models/Preferences';
 import { relationalStore } from '@kit.ArkData';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 interface AuthenticatorData {
   authenticators: AuthenticatorClass[];
@@ -20,7 +21,7 @@ async function getUnorderedAuthenticators(): Promise<AuthenticatorData> {
   let predicates: relationalStore.RdbPredicates = new relationalStore.RdbPredicates('authenticator');
   let queryResult = await rdbStore.getAll(predicates);
   let authenticators: AuthenticatorClass[] = [];
-  let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+  let authenticatorSequence = await preferences.get(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[];
 
   for (let i = 0; i < queryResult.length; i++) {
       let options: AuthenticatorClassOptions = {
