@@ -1,19 +1,25 @@
 import Want from '@ohos.app.ability.Want';
+import { ConfigurationConstant, Context } from '@kit.AbilityKit';
 import { common } from '@kit.AbilityKit';
 import { SettingsSwitchItem } from '../components/SettingsSwitchItem';
 import { Preferences } from '../models/Preferences';
-import { ComposeTitleBar, EditableTitleBar, window } from '@kit.ArkUI';
+import { EditableTitleBar, window } from '@kit.ArkUI';
 import { ListItemGroupHeader } from '../components/ListItemGroupHeader';
 import { SettingsSelectItem } from '../components/SettingsSelectItem';
 import { i18n } from '@kit.LocalizationKit';
 
 const preferences = Preferences.getInstance();
 
-
 const languageMap: Map<ResourceStr, string> = new Map<ResourceStr, string>([
   [$r('app.string.language_default'), 'default'],
   ['简体中文', 'zh-Hans-CN'],
   ['English', 'en-Latn-US']
+])
+
+const colorModeMap: Map<ResourceStr, ConfigurationConstant.ColorMode> = new Map<ResourceStr, ConfigurationConstant.ColorMode>([
+  [$r('app.string.SettingsPage_colorModeSystem'), ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET],
+  [$r('app.string.SettingsPage_colorModeLight'), ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT],
+  [$r('app.string.SettingsPage_colorModeDark'), ConfigurationConstant.ColorMode.COLOR_MODE_DARK]
 ])
 
 @Builder
@@ -28,9 +34,10 @@ struct SettingsPage {
   @State privacyMode: boolean = false;
   @State selectedLanguageIndex: number = -1;
   @State selectedLanguageValue: ResourceStr = '';
-  @State selectedDarkModeIndex: number = -1;
-  @State selectedDarkModeValue: ResourceStr = '';
+  @State selectedColorModeIndex: number = -1;
+  @State selectedColorModeValue: ResourceStr = '';
   @State currentPreferredLanguage: string = 'default';
+  private appContext = getContext(this).getApplicationContext()
   private windowClass = AppStorage.get('windowClass') as window.Window;
 
   build() {
@@ -70,6 +77,13 @@ struct SettingsPage {
                 selectedIndex: this.selectedLanguageIndex,
                 onSelect: this.onLanguageChange,
                 value: this.selectedLanguageValue
+              })
+              SettingsSelectItem({
+                title: $r('app.string.SettingsPage_darkMode'),
+                optionsText: Array.from(colorModeMap.keys()),
+                selectedIndex: this.selectedColorModeIndex,
+                onSelect: this.onColorModeChange,
+                value: this.selectedColorModeValue
               })
             }
             .backgroundColor($r('app.color.background_secondary'))
@@ -117,6 +131,12 @@ struct SettingsPage {
         this.privacyMode = privacyMode as boolean;
       });
 
+    preferences.get('colorMode', ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
+      .then((colorMode) => {
+        this.selectedColorModeIndex = Array.from(colorModeMap.values()).indexOf(colorMode as ConfigurationConstant.ColorMode);
+        this.selectedColorModeValue = Array.from(colorModeMap.keys())[this.selectedColorModeIndex];
+      })
+
     let preferredLanguage = i18n.System.getAppPreferredLanguage();
     this.currentPreferredLanguage = preferredLanguage
     this.selectedLanguageIndex = Array.from(languageMap.values()).indexOf(preferredLanguage);
@@ -141,5 +161,13 @@ struct SettingsPage {
       i18n.System.setAppPreferredLanguage(newPreferredLanguage);
       this.currentPreferredLanguage = newPreferredLanguage;
     }
+  }
+
+  onColorModeChange = (index: number) => {
+    let newColorMode = Array.from(colorModeMap.values())[index];
+    preferences.set('colorMode', newColorMode)
+      .then(() => {
+        this.appContext.setColorMode(newColorMode);
+      });
   }
 }

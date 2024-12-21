@@ -196,9 +196,26 @@
       "name": "SettingsPage_language",
       "value": "语言/Language"
     },
+
     {
       "name": "language_default",
       "value": "系统默认"
+    },
+    {
+      "name": "SettingsPage_darkMode",
+      "value": "深色模式"
+    },
+    {
+      "name": "SettingsPage_colorModeSystem",
+      "value": "跟随系统"
+    },
+    {
+      "name": "SettingsPage_colorModeLight",
+      "value": "始终浅色显示"
+    },
+    {
+      "name": "SettingsPage_colorModeDark",
+      "value": "始终深色显示"
     },
     {
       "name": "SettingsPage_privacyPolicy",
