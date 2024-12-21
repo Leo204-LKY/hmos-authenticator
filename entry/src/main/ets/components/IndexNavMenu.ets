@@ -31,6 +31,7 @@ struct IndexNavMenu {
       Image(image)
         .height(24)
         .width(24)
+        .fillColor($r('app.color.text_primary'))
     }
     .height(40)
     .width(40)
