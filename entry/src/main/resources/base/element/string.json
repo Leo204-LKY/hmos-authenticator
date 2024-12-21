@@ -201,6 +201,22 @@
       "value": "System default"
     },
     {
+      "name": "SettingsPage_darkMode",
+      "value": "Dark Mode"
+    },
+    {
+      "name": "SettingsPage_colorModeSystem",
+      "value": "Follow system"
+    },
+    {
+      "name": "SettingsPage_colorModeLight",
+      "value": "Always light"
+    },
+    {
+      "name": "SettingsPage_colorModeDark",
+      "value": "Always dark"
+    },
+    {
       "name": "SettingsPage_privacyPolicy",
       "value": "Privacy Policy"
     },

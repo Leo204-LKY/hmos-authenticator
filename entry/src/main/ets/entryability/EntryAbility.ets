@@ -52,16 +52,17 @@ export default class EntryAbility extends UIAbility {
 
     // 获取 preferences
     this.preferences.loadPreferences(this.context, preferencesName)
-      .then(() => {
+      .then(async () => {
         console.log('Preferences acquired.');
+
+        // 设置深色/浅色模式
+        let colorMode = await this.preferences.get('colorMode', ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
+        this.context.getApplicationContext().setColorMode(colorMode as ConfigurationConstant.ColorMode)
       })
       .catch((error: BusinessError) => {
         console.error('Error getting preferences: ' + error);
         return;
       });
-
-    // 设置深色模式
-    this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
   }
 
   onDestroy(): void {
