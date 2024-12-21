@@ -18,7 +18,7 @@ export async function addAuthenticatorFromUrl(otpUrl: string) {
     throw new Error('Invalid otpauth URL format');
   }
 
-  const protocol = match[1];
+  const otpTypes = match[1];
   const label = match[2];
   const queryString = match[3];
 
@@ -42,7 +42,7 @@ export async function addAuthenticatorFromUrl(otpUrl: string) {
     issuer: issuer,
     account: account,
     secret: secret,
-    protocol: protocol,
+    otp_type: otpTypes,
     algorithm: algorithm || 'SHA1',
     digits: digits,
     update_interval: updateInterval
