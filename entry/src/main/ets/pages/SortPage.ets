@@ -10,15 +10,6 @@ import { CancelDialog } from '../components/CancelDialog';
 
 const preferences = Preferences.getInstance();
 
-export class SortPageParams {
-  private _authenticators: AuthenticatorClass[];
-
-  constructor(authenticators: AuthenticatorClass[]) {
-    this._authenticators = authenticators;
-  }
-
-  get authenticators(): AuthenticatorClass[] { return this._authenticators };
-}
 
 @Builder
 export function sortPageBuilder() {
@@ -29,7 +20,7 @@ export function sortPageBuilder() {
 @Component
 struct SortPage {
   @Consume('navPathStack') navPathStack: NavPathStack;
-  @State authenticators: AuthenticatorClass[] = [];
+  @Consume('authenticators') authenticators: AuthenticatorClass[];
   @State dragItem: AuthenticatorClass | null = null;
   @State scaleItem: AuthenticatorClass | null = null;
   @State neighbourItem: AuthenticatorClass | null = null;
@@ -103,11 +94,6 @@ struct SortPage {
     .hideTitleBar(true)
     .backgroundColor($r('app.color.background_primary'))
     .onBackPressed(this.onBackPress)
-  }
-
-  aboutToAppear(): void {
-    let sortPageParams = this.navPathStack.getParamByIndex(0) as SortPageParams;
-    this.authenticators = sortPageParams.authenticators;
   }
 
   getItemIndex(itemId: number): number {
