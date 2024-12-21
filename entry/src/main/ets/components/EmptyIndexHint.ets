@@ -1,6 +1,10 @@
+import { buildAddMenuOptions } from '../models/AddMenuOptionBuilder';
+
 @Preview
 @Component
 export struct EmptyIndexHint {
+  @Consume('navPathStack') navPathStack: NavPathStack;
+
   build() {
     Column() {
       SymbolGlyph($r('sys.symbol.square_grid_2x2'))
@@ -16,6 +20,7 @@ export struct EmptyIndexHint {
       Button($r('app.string.EmptyIndexHint_addButtonText'))
         .buttonStyle(ButtonStyleMode.NORMAL)
         .margin({ top: 12 })
+        .bindMenu(buildAddMenuOptions(getContext(this), this.navPathStack))
     }
     .alignItems(HorizontalAlign.Center)
   }
