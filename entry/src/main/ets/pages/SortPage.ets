@@ -4,7 +4,7 @@
 
 import { EditableLeftIconType, EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar';
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
-import { SortPageAuthenticatorItem } from '../components/SortPageAuthenticatorItem'
+import { SortPageAuthenticatorItem } from '../components/SortPageAuthenticatorItem';
 import { Preferences } from '../models/Preferences';
 import { CancelDialog } from '../components/CancelDialog';
 

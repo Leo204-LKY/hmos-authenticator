@@ -2,7 +2,6 @@ import { AuthenticatorClass, AuthenticatorClassOptions, OtpAlgorithms, OtpTypes 
 import { RelationalStore } from '../models/RelationalStore';
 import { Preferences } from '../models/Preferences';
 import { relationalStore } from '@kit.ArkData';
-import { audio } from '@kit.AudioKit';
 
 interface AuthenticatorData {
   authenticators: AuthenticatorClass[];

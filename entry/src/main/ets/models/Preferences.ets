@@ -1,4 +1,4 @@
-import preferences from "@ohos.data.preferences";
+import preferences from '@ohos.data.preferences';
 import { common } from '@kit.AbilityKit';
 
 export class Preferences {

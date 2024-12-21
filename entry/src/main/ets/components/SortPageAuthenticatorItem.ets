@@ -1,4 +1,4 @@
-import { AuthenticatorClass } from '../models/AuthenticatorClass'
+import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { curves } from '@kit.ArkUI';
 
 @Component

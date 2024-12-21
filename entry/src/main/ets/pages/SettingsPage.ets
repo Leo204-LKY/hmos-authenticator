@@ -1,8 +1,8 @@
-import Want from "@ohos.app.ability.Want";
-import { common } from "@kit.AbilityKit";
-import { SettingsSwitchItem } from "../components/SettingsSwitchItem";
-import { Preferences } from "../models/Preferences";
-import { window } from "@kit.ArkUI";
+import Want from '@ohos.app.ability.Want';
+import { common } from '@kit.AbilityKit';
+import { SettingsSwitchItem } from '../components/SettingsSwitchItem';
+import { Preferences } from '../models/Preferences';
+import { window } from '@kit.ArkUI';
 
 const preferences = Preferences.getInstance();
 
