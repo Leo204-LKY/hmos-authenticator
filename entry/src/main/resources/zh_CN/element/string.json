@@ -25,8 +25,16 @@
       "value": "搜索"
     },
     {
+      "name": "mainPageMenu_sort",
+      "value": "排序"
+    },
+    {
       "name": "mainPageMenu_settings",
       "value": "设置"
+    },
+    {
+      "name": "mainPageMenu_noAuthenticatorToast",
+      "value": "没有验证器可供排序，请先添加验证器"
     },
     {
       "name": "addDialog_title",
@@ -37,11 +45,11 @@
       "value": "选择添加验证器的方式"
     },
     {
-      "name": "addDialog_scanToAdd",
+      "name": "addMenuOptions_scanToAdd",
       "value": "扫描二维码"
     },
     {
-      "name": "addDialog_manualAdd",
+      "name": "addMenuOptions_manualAdd",
       "value": "手动输入"
     },
     {
