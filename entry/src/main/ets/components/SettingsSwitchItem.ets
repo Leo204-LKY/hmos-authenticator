@@ -1,7 +1,7 @@
 @Component
 export struct SettingsSwitchItem {
-  @State title: ResourceStr = 'SettingsSwitchItem';
-  @State description: ResourceStr = '';
+  @Require @Prop title: ResourceStr;
+  @Prop description: ResourceStr = '';
   @Link isOn: boolean;
   onChange: Function = (isOn: boolean) => {this.isOn = isOn};
 
@@ -22,6 +22,7 @@ export struct SettingsSwitchItem {
 
         Toggle({ type: ToggleType.Switch, isOn: this.isOn })
           .onChange((isOn: boolean) => { this.onChange(isOn); })
+          .margin({ left: 8 })
       }
     }
     .padding({ top: 16, bottom: 16 })
