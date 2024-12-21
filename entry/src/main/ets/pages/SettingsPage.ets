@@ -66,7 +66,7 @@ struct SettingsPage {
             ListItemGroup() {
               SettingsSelectItem({
                 title: $r('app.string.SettingsPage_language'),
-                optionMaps: languageMap,
+                optionsText: Array.from(languageMap.keys()),
                 selectedIndex: this.selectedLanguageIndex,
                 onSelect: this.onLanguageChange,
                 value: this.selectedLanguageValue
