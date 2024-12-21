@@ -7,6 +7,7 @@ import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { SortPageAuthenticatorItem } from '../components/SortPageAuthenticatorItem';
 import { Preferences } from '../models/Preferences';
 import { CancelDialog } from '../components/CancelDialog';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 const preferences = Preferences.getInstance();
 
@@ -144,7 +145,7 @@ struct SortPage {
       newSequence.push(this.authenticators[i].id)
     }
 
-    await preferences.set('authenticatorSequence', newSequence)
+    await preferences.set(PreferenceConstants.AUTHENTICATOR_SEQUENCE, newSequence)
     this.navPathStack.pop();
   }
 }

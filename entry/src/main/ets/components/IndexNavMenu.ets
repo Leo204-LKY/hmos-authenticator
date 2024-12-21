@@ -1,6 +1,7 @@
 import { buildAddMenuOptions } from '../models/AddMenuOptionBuilder';
 import { Preferences } from '../models/Preferences';
 import { promptAction } from '@kit.ArkUI';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 const preferences = Preferences.getInstance();
 
@@ -43,7 +44,7 @@ struct IndexNavMenu {
   }
 
   private sortItem = () => {
-    let authenticatorCount = (preferences.getSync('authenticatorSequence', []) as number[]).length;
+    let authenticatorCount = (preferences.getSync(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[]).length;
 
     if (authenticatorCount == 0) {
       promptAction.showToast({

@@ -7,6 +7,8 @@ import { Preferences } from '../models/Preferences';
 import { CancelDialog } from '../components/CancelDialog';
 import { relationalStore, ValuesBucket } from '@kit.ArkData';
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
+import { EventConstants } from '../models/EventConstants';
+import { PreferenceConstants } from '../models/PreferenceConstants';
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -233,13 +235,13 @@ struct EditPage {
     }
 
     if (success) {
-      getContext(this).eventHub.emit('onUpdateAuthenticators');
+      getContext(this).eventHub.emit(EventConstants.ON_UPDATE_AUTHENTICATORS);
       this.navPathStack.pop();
     }
   }
 
   private async saveNewAuthenticator(): Promise<boolean> {
-    let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
+    let authenticatorSequence = await preferences.get(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[];
     let values: ValuesBucket = {
       issuer: this.issuer,
       account: this.account,
@@ -254,7 +256,7 @@ struct EditPage {
 
     if (rowId != -1) {
       authenticatorSequence.push(rowId);
-      preferences.set('authenticatorSequence', authenticatorSequence);
+      preferences.set(PreferenceConstants.AUTHENTICATOR_SEQUENCE, authenticatorSequence);
       return true;
     }
     return false;

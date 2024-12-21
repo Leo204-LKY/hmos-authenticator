@@ -3,6 +3,7 @@ import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { Context } from '@kit.AbilityKit';
 import { promptAction } from '@kit.ArkUI';
+import { EventConstants } from './EventConstants';
 
 let context: Context | undefined;
 
@@ -37,7 +38,7 @@ let scanToAdd = () => {
         if (scanValue.toLowerCase().startsWith('otpauth://totp/')) {
           addAuthenticatorFromUrl(scanValue)
             .then(() => {
-              context?.eventHub.emit('onUpdateAuthenticators')
+              context?.eventHub.emit(EventConstants.ON_UPDATE_AUTHENTICATORS)
               promptAction.showToast({
                 message: $r('app.string.scanAdd_successToast'),
                 duration: 2000

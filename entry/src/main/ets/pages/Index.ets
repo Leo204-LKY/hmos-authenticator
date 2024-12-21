@@ -8,6 +8,8 @@ import { window } from '@kit.ArkUI'
 import { preferences as prefClass } from '@kit.ArkData'
 import { EmptyIndexHint } from '../components/EmptyIndexHint'
 import { buildIndexNavMenu } from '../components/IndexNavMenu'
+import { EventConstants } from '../models/EventConstants'
+import { PreferenceConstants } from '../models/PreferenceConstants'
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -57,9 +59,9 @@ struct Index {
   aboutToAppear(): void {
     this.updateAuthenticators();
     setInterval(() => { this.emitTimestamp(); }, 1000);
-    getContext(this).eventHub.on('onDeleteAuthenticator', (id: number) => { this.deleteAuthenticator(id); });
-    getContext(this).eventHub.on('onUpdateAuthenticators', () => { this.updateAuthenticators(); })
-    preferences.get('privacyMode', true)
+    getContext(this).eventHub.on(EventConstants.ON_DELETE_AUTHENTICATOR, (id: number) => { this.deleteAuthenticator(id); });
+    getContext(this).eventHub.on(EventConstants.ON_UPDATE_AUTHENTICATORS, () => { this.updateAuthenticators(); })
+    preferences.get(PreferenceConstants.PRIVACY_MODE, true)
       .then((value: prefClass.ValueType) => {
         let privacyMode = value as boolean;
         this.windowClass.setWindowPrivacyMode(privacyMode);
@@ -75,15 +77,15 @@ struct Index {
 
   private emitTimestamp() {
     const timestamp = Math.floor(Date.now() / 1000);
-    getContext(this).eventHub.emit('onEmitTimestamp', timestamp);
+    getContext(this).eventHub.emit(EventConstants.ON_EMIT_TIMESTAMP, timestamp);
   }
 
   private async deleteAuthenticator(idToRemove: number) {
     let predicates = new relationalStore.RdbPredicates('authenticator');
     predicates.equalTo('id', idToRemove);
     rdbStore.delete(predicates);
-    let authenticatorSequence = await preferences.get('authenticatorSequence', []) as number[];
-    await preferences.set('authenticatorSequence', authenticatorSequence.filter(id => id != idToRemove));
+    let authenticatorSequence = await preferences.get(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[];
+    await preferences.set(PreferenceConstants.AUTHENTICATOR_SEQUENCE, authenticatorSequence.filter(id => id != idToRemove));
     this.updateAuthenticators();
   }
 }
