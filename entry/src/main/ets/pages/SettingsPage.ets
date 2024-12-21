@@ -135,12 +135,14 @@ struct SettingsPage {
       .then((colorMode) => {
         this.selectedColorModeIndex = Array.from(colorModeMap.values()).indexOf(colorMode as ConfigurationConstant.ColorMode);
         this.selectedColorModeValue = Array.from(colorModeMap.keys())[this.selectedColorModeIndex];
-      })
+      });
 
-    let preferredLanguage = i18n.System.getAppPreferredLanguage();
-    this.currentPreferredLanguage = preferredLanguage
-    this.selectedLanguageIndex = Array.from(languageMap.values()).indexOf(preferredLanguage);
-    this.selectedLanguageValue = Array.from(languageMap.keys())[this.selectedLanguageIndex];
+    preferences.get('prefLanguage', 'default')
+      .then((prefLanguage) => {
+        this.currentPreferredLanguage = prefLanguage as string;
+        this.selectedLanguageIndex = Array.from(languageMap.values()).indexOf(prefLanguage as string);
+        this.selectedLanguageValue = Array.from(languageMap.keys())[this.selectedLanguageIndex];
+      })
   }
 
   onPrivacyModeChange = (isOn: boolean) => {
@@ -160,6 +162,7 @@ struct SettingsPage {
       }
       i18n.System.setAppPreferredLanguage(newPreferredLanguage);
       this.currentPreferredLanguage = newPreferredLanguage;
+      preferences.set('prefLanguage', newPreferredLanguage);
     }
   }
 

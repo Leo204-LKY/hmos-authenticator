@@ -5,6 +5,7 @@ import { relationalStore } from '@kit.ArkData';
 import { RelationalStore } from '../models/RelationalStore';
 import { Preferences } from '../models/Preferences';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { i18n } from '@kit.LocalizationKit';
 
 const storeConfig: relationalStore.StoreConfig = {
   name: 'authenticators.db',
@@ -58,6 +59,10 @@ export default class EntryAbility extends UIAbility {
         // 设置深色/浅色模式
         let colorMode = await this.preferences.get('colorMode', ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
         this.context.getApplicationContext().setColorMode(colorMode as ConfigurationConstant.ColorMode)
+
+        // 设置显示语言
+        let prefLanguage = await this.preferences.get('prefLanguage', 'default');
+        i18n.System.setAppPreferredLanguage(prefLanguage as string);
       })
       .catch((error: BusinessError) => {
         console.error('Error getting preferences: ' + error);
