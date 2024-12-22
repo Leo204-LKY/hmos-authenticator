@@ -12,6 +12,7 @@ export struct SettingsSwitchItem {
           Text(this.title)
             .fontWeight(FontWeight.Bold)
             .width('100%')
+            .fontColor($r('app.color.text_primary'))
           Text(this.description)
             .width('100%')
             .fontColor($r('app.color.text_secondary'))
