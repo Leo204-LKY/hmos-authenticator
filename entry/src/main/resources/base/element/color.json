@@ -2,27 +2,27 @@
   "color": [
     {
       "name": "start_window_background",
-      "value": "#FFFFFF"
+      "value": "#FFF1F3F5"
     },
     {
       "name": "background_primary",
-      "value": "#F1F2F3"
+      "value": "#FFF1F3F5"
     },
     {
       "name": "background_secondary",
-      "value": "#FFFFFF"
+      "value": "#FFFFFFFF"
     },
     {
       "name": "text_primary",
-      "value": "#000000"
+      "value": "#E5000000"
     },
     {
       "name": "text_secondary",
-      "value": "#666666"
+      "value": "#99000000"
     },
     {
       "name": "text_disabled",
-      "value": "#C7C7CC"
+      "value": "#33000000"
     },
     {
       "name": "divider",
@@ -34,11 +34,11 @@
     },
     {
       "name": "white",
-      "value": "#FFFFFF"
+      "value": "#FFFFFFFF"
     },
     {
       "name": "warning",
-      "value": "#E84026"
+      "value": "#FFE84026"
     }
   ]
 }
