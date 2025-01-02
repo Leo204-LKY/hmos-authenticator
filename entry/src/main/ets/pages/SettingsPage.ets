@@ -10,6 +10,7 @@ import { i18n } from '@kit.LocalizationKit';
 import { PreferenceConstants } from '../models/PreferenceConstants';
 import { SettingsClickItem } from '../components/SettingsClickItem';
 import { ListItemGroupDivider } from '../components/ListItemGroupDivider';
+import { goToUrl } from '../utils/GoToUrl';
 
 const preferences = Preferences.getInstance();
 
@@ -91,7 +92,7 @@ struct SettingsPage {
             }
             .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
-            .padding({ left: 16, right: 16})
+            .padding({ left: 16, right: 16 })
 
             // 关于
             ListItemGroupHeader({ text: $r('app.string.SettingsPage_aboutHeader') })
@@ -99,12 +100,10 @@ struct SettingsPage {
               SettingsClickItem({
                 title: $r('app.string.SettingsPage_privacyPolicy'),
                 onItemClick: () => {
-                  let context = getContext(this) as common.UIAbilityContext;
-                  let want: Want = {
-                    action: 'ohos.want.action.viewData',
-                    uri: 'https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1573492775360423168'
-                  };
-                  context.startAbility(want);
+                  goToUrl(
+                    this,
+                    'https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1573492775360423168'
+                  )
                 }
               })
             }
