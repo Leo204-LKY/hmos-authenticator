@@ -95,18 +95,16 @@ struct SettingsPage {
             // 关于
             ListItemGroupHeader({ text: $r('app.string.SettingsPage_aboutHeader') })
             ListItemGroup() {
-              ListItem() {
-                Text($r('app.string.SettingsPage_privacyPolicy'))
-                  .width('100%')
-              }
-              .padding({ top: 16, bottom: 16 })
-              .onClick(() => {
-                let context = getContext(this) as common.UIAbilityContext;
-                let want: Want = {
-                  action: 'ohos.want.action.viewData',
-                  uri: 'https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1573492775360423168'
-                };
-                context.startAbility(want);
+              SettingsClickItem({
+                title: $r('app.string.SettingsPage_privacyPolicy'),
+                onItemClick: () => {
+                  let context = getContext(this) as common.UIAbilityContext;
+                  let want: Want = {
+                    action: 'ohos.want.action.viewData',
+                    uri: 'https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1573492775360423168'
+                  };
+                  context.startAbility(want);
+                }
               })
             }
             .backgroundColor($r('app.color.background_secondary'))
