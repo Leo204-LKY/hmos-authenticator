@@ -1,7 +1,7 @@
 @Component
 export struct SettingsSwitchItem {
   @Require @Prop title: ResourceStr;
-  @Prop description: ResourceStr = '';
+  @Prop description: ResourceStr | undefined;
   @Link isOn: boolean;
   onChange: Function = (isOn: boolean) => {this.isOn = isOn};
 
@@ -26,6 +26,7 @@ export struct SettingsSwitchItem {
           .margin({ left: 8 })
       }
     }
-    .padding({ top: 16, bottom: 16 })
+    .constraintSize({ minHeight: 60 })
+    .padding({ top: 8, bottom: 8 })
   }
 }
