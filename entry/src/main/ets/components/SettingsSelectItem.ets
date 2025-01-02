@@ -1,7 +1,7 @@
 @Component
 export struct SettingsSelectItem {
   @Require @Prop title: ResourceStr;
-  @Prop description: ResourceStr = '';
+  @Prop description: ResourceStr | undefined;
   @Require @Prop optionsText: ResourceStr[];
   @Link selectedIndex: number;
   @Prop value: ResourceStr;
@@ -44,6 +44,7 @@ export struct SettingsSelectItem {
           .margin({ right: -8 })
       }
       .width('100%')
+      .constraintSize({ minHeight: 36 })
       .margin({ top: 8, bottom: 8 })
     }
   }
