@@ -13,6 +13,14 @@
       "value": "#FFFFFFFF"
     },
     {
+      "name": "background_hover",
+      "value": "#0C000000"
+    },
+    {
+      "name": "background_pressed",
+      "value": "#19000000"
+    },
+    {
       "name": "text_primary",
       "value": "#E5000000"
     },
