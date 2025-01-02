@@ -41,7 +41,7 @@ export struct SettingsSelectItem {
             }
             this.onSelect(index);
           })
-          .margin({ right: -8 })
+          .margin({ left: 8, right: -8 })
       }
       .width('100%')
       .constraintSize({ minHeight: 36 })

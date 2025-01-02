@@ -34,6 +34,7 @@ export struct SettingsClickItem {
           .height(24)
           .width(24)
           .fillColor($r('app.color.text_secondary'))
+          .margin({ left: 8, right: -8 })
       }
     }
     .constraintSize({ minHeight: 42 })
