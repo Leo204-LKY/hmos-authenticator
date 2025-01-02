@@ -3,6 +3,7 @@ export struct SettingsClickItem {
   @Require @Prop title: ResourceStr;
   @Prop description: ResourceStr | undefined;
   onItemClick = (_: ClickEvent) => {};
+  @State itemBackgroundColor: ResourceColor | null = null;
 
   @Styles
   onPress() {
@@ -11,7 +12,7 @@ export struct SettingsClickItem {
 
   @Styles
   onNormal() {
-    .backgroundColor(null)
+    .backgroundColor(this.itemBackgroundColor)
   }
 
   build() {
@@ -37,11 +38,21 @@ export struct SettingsClickItem {
           .margin({ left: 8, right: -8 })
       }
     }
+    .backgroundColor(this.itemBackgroundColor)
     .constraintSize({ minHeight: 42 })
     .padding({ left: 12, right: 12 })
     .margin({ left: -12, right: -12, top: 4, bottom: 4 })
     .borderRadius(12)
     .onClick(this.onItemClick)
+    .onHover((isHover: boolean, _: HoverEvent) => {
+      animateTo({ duration: 200 }, () => {
+        if (isHover) {
+          this.itemBackgroundColor = $r('app.color.background_hover');
+        } else {
+          this.itemBackgroundColor = null;
+        }
+      })
+    })
     .stateStyles({
       normal: this.onNormal,
       pressed: this.onPress
