@@ -14,7 +14,7 @@ export struct SettingsSelectItem {
   build() {
     ListItem() {
       Row() {
-        Column() {
+        Column({ space: 2 }) {
           Text(this.title)
             .fontColor($r('app.color.text_primary'))
             .fontWeight(FontWeight.Bold)

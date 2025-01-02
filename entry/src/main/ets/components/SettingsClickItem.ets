@@ -18,7 +18,7 @@ export struct SettingsClickItem {
   build() {
     ListItem() {
       Row() {
-        Column() {
+        Column({ space: 2 }) {
           Text(this.title)
             .fontWeight(FontWeight.Bold)
             .width('100%')
@@ -39,7 +39,7 @@ export struct SettingsClickItem {
       }
     }
     .backgroundColor(this.itemBackgroundColor)
-    .constraintSize({ minHeight: 42 })
+    .constraintSize({ minHeight: 48 })
     .padding({ left: 12, right: 12 })
     .margin({ left: -12, right: -12, top: 4, bottom: 4 })
     .borderRadius(12)

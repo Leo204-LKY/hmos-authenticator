@@ -8,7 +8,7 @@ export struct SettingsSwitchItem {
   build() {
     ListItem() {
       Row() {
-        Column() {
+        Column({ space: 2 }) {
           Text(this.title)
             .fontWeight(FontWeight.Bold)
             .width('100%')
