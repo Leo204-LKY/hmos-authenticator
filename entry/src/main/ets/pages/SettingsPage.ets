@@ -8,6 +8,8 @@ import { ListItemGroupHeader } from '../components/ListItemGroupHeader';
 import { SettingsSelectItem } from '../components/SettingsSelectItem';
 import { i18n } from '@kit.LocalizationKit';
 import { PreferenceConstants } from '../models/PreferenceConstants';
+import { SettingsClickItem } from '../components/SettingsClickItem';
+import { ListItemGroupDivider } from '../components/ListItemGroupDivider';
 
 const preferences = Preferences.getInstance();
 
@@ -67,7 +69,6 @@ struct SettingsPage {
             .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
             .padding({ left: 16, right: 16})
-            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
 
             // 外观
             ListItemGroupHeader({ text: $r('app.string.SettingsPage_appearanceHeader') })
@@ -79,6 +80,7 @@ struct SettingsPage {
                 onSelect: this.onLanguageChange,
                 value: this.selectedLanguageValue
               })
+              ListItemGroupDivider()
               SettingsSelectItem({
                 title: $r('app.string.SettingsPage_darkMode'),
                 optionsText: Array.from(colorModeMap.keys()),
@@ -90,7 +92,6 @@ struct SettingsPage {
             .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
             .padding({ left: 16, right: 16})
-            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
 
             // 关于
             ListItemGroupHeader({ text: $r('app.string.SettingsPage_aboutHeader') })
@@ -110,7 +111,6 @@ struct SettingsPage {
             .backgroundColor($r('app.color.background_secondary'))
             .borderRadius(16)
             .padding({ left: 16, right: 16})
-            .divider({ strokeWidth: 1, color: $r('app.color.divider') })
           }
         }
         .margin({ left: 16, right: 16 })
