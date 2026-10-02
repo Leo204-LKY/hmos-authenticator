@@ -10,3 +10,8 @@
 /.clang-tidy
 **/.test
 /.appanalyzer
+/.ohos
+.DS_Store
+*.p12
+*.cer
+*.p7b
