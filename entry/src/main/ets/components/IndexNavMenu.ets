@@ -1,6 +1,7 @@
 import { buildAddMenuOptions } from '../models/AddMenuOptionBuilder';
 import { Preferences } from '../models/Preferences';
 import { PreferenceConstants } from '../models/PreferenceConstants';
+import { getIconButtonImmersiveMaterial } from '../utils/ImmersiveMaterials';
 
 const preferences = Preferences.getInstance();
 
@@ -37,6 +38,7 @@ struct IndexNavMenu {
     .width(40)
     .type(ButtonType.Circle)
     .buttonStyle(ButtonStyleMode.NORMAL)
+    .systemMaterial(getIconButtonImmersiveMaterial())
     .align(Alignment.Center)
     .onClick(onClick)
     .bindMenu(bindMenu)

@@ -47,6 +47,10 @@
     {
       "name": "warning",
       "value": "#FFE84026"
+    },
+    {
+      "name": "warning_material",
+      "value": "#CCE84026"
     }
   ]
 }

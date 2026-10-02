@@ -2,6 +2,7 @@ import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { EventConstants } from '../models/EventConstants';
 import { EditPageParams } from '../pages/EditPage';
 import { ConfirmRemoveDialog } from './ConfirmRemoveDialog';
+import { getIconButtonImmersiveMaterial, getWarningButtonImmersiveMaterial } from '../utils/ImmersiveMaterials';
 
 @Component
 export struct AuthenticatorItem {
@@ -30,6 +31,7 @@ export struct AuthenticatorItem {
       }
       .type(ButtonType.Circle)
       .backgroundColor($r('app.color.background_secondary'))
+      .systemMaterial(getIconButtonImmersiveMaterial())
       .align(Alignment.Center)
       .padding(8)
       .height('100%')
@@ -44,6 +46,7 @@ export struct AuthenticatorItem {
       }
       .type(ButtonType.Circle)
       .backgroundColor($r('app.color.warning'))
+      .systemMaterial(getWarningButtonImmersiveMaterial())
       .align(Alignment.Center)
       .padding(8)
       .height('100%')

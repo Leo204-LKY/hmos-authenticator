@@ -47,6 +47,10 @@
     {
       "name": "warning",
       "value": "#FFD94838"
+    },
+    {
+      "name": "warning_material",
+      "value": "#CCD94838"
     }
   ]
 }

@@ -8,6 +8,7 @@ import { relationalStore, ValuesBucket } from '@kit.ArkData';
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { EventConstants } from '../models/EventConstants';
 import { PreferenceConstants } from '../models/PreferenceConstants';
+import { getTextButtonImmersiveMaterial } from '../utils/ImmersiveMaterials';
 
 const rdbStore = RelationalStore.getInstance();
 const preferences = Preferences.getInstance();
@@ -108,6 +109,7 @@ struct EditPage {
                   .alignSelf(ItemAlign.Center)
                   .margin({ top: 20 })
                   .buttonStyle(ButtonStyleMode.NORMAL)
+                  .systemMaterial(getTextButtonImmersiveMaterial())
                   .visibility(this.advancedSettingsVisible ? Visibility.None : Visibility.Visible)
                   .onClick(() => {
                     this.advancedSettingsVisible = true;

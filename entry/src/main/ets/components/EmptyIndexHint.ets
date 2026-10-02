@@ -1,4 +1,5 @@
 import { buildAddMenuOptions } from '../models/AddMenuOptionBuilder';
+import { getTextButtonImmersiveMaterial } from '../utils/ImmersiveMaterials';
 
 @Preview
 @Component
@@ -19,6 +20,7 @@ export struct EmptyIndexHint {
 
       Button($r('app.string.EmptyIndexHint_addButtonText'))
         .buttonStyle(ButtonStyleMode.NORMAL)
+        .systemMaterial(getTextButtonImmersiveMaterial())
         .margin({ top: 12 })
         .bindMenu(buildAddMenuOptions(this.getUIContext(), this.navPathStack))
     }
