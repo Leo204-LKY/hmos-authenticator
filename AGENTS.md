@@ -1,6 +1,6 @@
 # AGENTS.md
 
-HarmonyOS（ArkTS/ArkUI）TOTP 验证器应用。单模块 `entry`，`compatibleSdkVersion: 5.0.0(12)`，支持 phone / tablet / 2in1。
+HarmonyOS（ArkTS/ArkUI）TOTP 验证器应用。单模块 `entry`，`compatibleSdkVersion: 26.0.0`，支持 phone / tablet / 2in1。
 
 ## 八荣八耻
 
