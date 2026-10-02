@@ -73,6 +73,10 @@ struct Index {
       .then((authenticators: AuthenticatorClass[]) => {
         this.authenticators = authenticators;
       })
+      .catch((error: Error) => {
+        // 数据存储尚未就绪等情况，等待存储就绪事件触发重试
+        console.error('Failed to load authenticators: ' + error.message);
+      })
   };
 
   private emitTimestamp() {

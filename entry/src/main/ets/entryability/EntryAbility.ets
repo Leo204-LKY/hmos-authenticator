@@ -7,6 +7,7 @@ import { Preferences } from '../models/Preferences';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { i18n } from '@kit.LocalizationKit';
 import { PreferenceConstants } from '../models/PreferenceConstants';
+import { EventConstants } from '../models/EventConstants';
 
 const storeConfig: relationalStore.StoreConfig = {
   name: 'authenticators.db',
@@ -32,26 +33,36 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
-    // 获取并初始化数据库
-    this.initRdbStore();
+    // 初始化数据存储，完成后通知页面刷新
+    this.initStores();
+  }
 
-    // 获取 preferences
-    this.preferences.loadPreferences(this.context, preferencesName)
-      .then(async () => {
-        console.log('Preferences acquired.');
+  private async initStores(): Promise<void> {
+    await this.initRdbStore();
+    await this.initPreferences();
 
-        // 设置深色/浅色模式
-        let colorMode = await this.preferences.get(PreferenceConstants.COLOR_MODE, ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
-        this.context.getApplicationContext().setColorMode(colorMode as ConfigurationConstant.ColorMode)
+    // 存储就绪后通知页面刷新验证器列表。
+    // 系统应用锁等场景下进程可能在锁屏遮罩后被挂起，存储初始化完成晚于页面首次拉取数据，
+    // 此时页面已注册该事件监听，收到事件后会重新拉取数据
+    this.context.eventHub.emit(EventConstants.ON_UPDATE_AUTHENTICATORS);
+  }
 
-        // 设置显示语言
-        let prefLanguage = await this.preferences.get(PreferenceConstants.PREFERENCE_LANGUAGE, 'default');
-        i18n.System.setAppPreferredLanguage(prefLanguage as string);
-      })
-      .catch((error: BusinessError) => {
-        console.error('Error getting preferences: ', error);
-        return;
-      });
+  private async initPreferences(): Promise<void> {
+    try {
+      await this.preferences.loadPreferences(this.context, preferencesName);
+      console.log('Preferences acquired.');
+
+      // 设置深色/浅色模式
+      let colorMode = await this.preferences.get(PreferenceConstants.COLOR_MODE, ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
+      this.context.getApplicationContext().setColorMode(colorMode as ConfigurationConstant.ColorMode)
+
+      // 设置显示语言
+      let prefLanguage = await this.preferences.get(PreferenceConstants.PREFERENCE_LANGUAGE, 'default');
+      i18n.System.setAppPreferredLanguage(prefLanguage as string);
+    } catch (error) {
+      const err = error as BusinessError;
+      console.error('Error getting preferences: ', err.code, err.message);
+    }
   }
 
   private async initRdbStore(): Promise<void> {
@@ -111,6 +122,10 @@ export default class EntryAbility extends UIAbility {
   onForeground(): void {
     // Ability has brought to foreground
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
+
+    // 回到前台时刷新验证器列表（覆盖系统应用锁解锁后回到前台、
+    // 首次启动时数据尚未就绪等场景）
+    this.context.eventHub.emit(EventConstants.ON_UPDATE_AUTHENTICATORS);
   }
 
   onBackground(): void {
