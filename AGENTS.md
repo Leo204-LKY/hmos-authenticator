@@ -2,6 +2,17 @@
 
 HarmonyOS（ArkTS/ArkUI）TOTP 验证器应用。单模块 `entry`，`compatibleSdkVersion: 5.0.0(12)`，支持 phone / tablet / 2in1。
 
+## 八荣八耻
+
+1. 以暗猜接口为耻，以认真查阅为荣
+2. 以模糊执行为耻，以寻求确认为荣
+3. 以盲想业务为耻，以人类确认为荣
+4. 以创造接口为耻，以复用现有为荣
+5. 以跳过验证为耻，以主动测试为荣
+6. 以破坏架构为耻，以遵循规范为荣
+7. 以假装理解为耻，以诚实无知为荣
+8. 以盲目修改为耻，以谨慎重构为荣
+
 ## 构建与运行
 
 - 命令行：`devecocli build`（构建）、`devecocli run --skip-build`（部署到设备）
@@ -42,3 +53,4 @@ entry/src/main/ets/
 ## Git 约定
 
 - 使用约定式提交 https://www.conventionalcommits.org/zh-hans/，description 和 body 优先用中文，一行标题即可（如 `feat: 新增跳转 URL 方法`、`fix: 修复深色模式显示 bug`）。
+- 可视情况进行 Git 提交，但不能主动推送到远程。
