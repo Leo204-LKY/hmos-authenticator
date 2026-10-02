@@ -20,7 +20,7 @@ export struct EmptyIndexHint {
       Button($r('app.string.EmptyIndexHint_addButtonText'))
         .buttonStyle(ButtonStyleMode.NORMAL)
         .margin({ top: 12 })
-        .bindMenu(buildAddMenuOptions(getContext(this), this.navPathStack))
+        .bindMenu(buildAddMenuOptions(this.getUIContext(), this.navPathStack))
     }
     .alignItems(HorizontalAlign.Center)
   }

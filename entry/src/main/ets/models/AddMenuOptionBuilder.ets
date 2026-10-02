@@ -2,13 +2,15 @@ import { scanBarcode, scanCore } from '@kit.ScanKit';
 import { addAuthenticatorFromUrl } from '../utils/AddAuthenticatorItemFromUrl';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { Context } from '@kit.AbilityKit';
-import { promptAction } from '@kit.ArkUI';
+import { PromptAction } from '@kit.ArkUI';
 import { EventConstants } from './EventConstants';
 
 let context: Context | undefined;
+let prompt: PromptAction | undefined;
 
-export function buildAddMenuOptions(context_: Context, navPathStack: NavPathStack): Array<MenuElement> {
-  context = context_
+export function buildAddMenuOptions(uiContext: UIContext, navPathStack: NavPathStack): Array<MenuElement> {
+  context = uiContext.getHostContext();
+  prompt = uiContext.getPromptAction();
   return [
     {
       value: $r("app.string.addMenuOptions_scanToAdd"),
@@ -24,6 +26,8 @@ export function buildAddMenuOptions(context_: Context, navPathStack: NavPathStac
 }
 
 let scanToAdd = () => {
+  if (!context) return;
+
   let options: scanBarcode.ScanOptions = {
     scanTypes: [scanCore.ScanType.QR_CODE],
     enableMultiMode: true,
@@ -39,18 +43,18 @@ let scanToAdd = () => {
           addAuthenticatorFromUrl(scanValue)
             .then(() => {
               context?.eventHub.emit(EventConstants.ON_UPDATE_AUTHENTICATORS)
-              promptAction.showToast({
+              prompt?.showToast({
                 message: $r('app.string.scanAdd_successToast'),
                 duration: 2000
               })
             })
         } else if (scanValue.toLowerCase().startsWith('otpauth://hotp/')) { // TOTP 类型暂不支持
-          promptAction.showToast({
+          prompt?.showToast({
             message: $r('app.string.scanAdd_notSupportToast'),
             duration: 3000
           })
         } else {  // 非有效的 OTP 二维码
-          promptAction.showToast({
+          prompt?.showToast({
             message: $r('app.string.scanAdd_invalidCodeToast'),
             duration: 2000
           })

@@ -1,4 +1,4 @@
-import cryptoFramework from '@ohos.security.cryptoFramework';
+import { cryptoFramework } from '@kit.CryptoArchitectureKit';
 
 export type OtpTypes = 'TOTP';
 export type OtpAlgorithms = 'SHA1' | 'SHA256' | 'SHA512';

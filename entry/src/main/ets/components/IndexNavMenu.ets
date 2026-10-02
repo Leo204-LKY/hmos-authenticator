@@ -1,6 +1,5 @@
 import { buildAddMenuOptions } from '../models/AddMenuOptionBuilder';
 import { Preferences } from '../models/Preferences';
-import { promptAction } from '@kit.ArkUI';
 import { PreferenceConstants } from '../models/PreferenceConstants';
 
 const preferences = Preferences.getInstance();
@@ -19,7 +18,7 @@ struct IndexNavMenu {
 
   build() {
     Row({space: 8}) {
-      this.MenuButton($r('app.media.ic_public_add'), undefined, buildAddMenuOptions(getContext(this), this.navPathStack))
+      this.MenuButton($r('app.media.ic_public_add'), undefined, buildAddMenuOptions(this.getUIContext(), this.navPathStack))
       // this.MenuButton($r('app.media.ic_public_search'))  // TODO: 搜索页面
       this.MenuButton($r('app.media.ic_public_more'), undefined, this.moreMenu)
     }
@@ -47,7 +46,7 @@ struct IndexNavMenu {
     let authenticatorCount = (preferences.getSync(PreferenceConstants.AUTHENTICATOR_SEQUENCE, []) as number[]).length;
 
     if (authenticatorCount == 0) {
-      promptAction.showToast({
+      this.getUIContext().getPromptAction().showToast({
         message: $r('app.string.mainPageMenu_noAuthenticatorToast'),
         duration: 3000
       })

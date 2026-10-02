@@ -32,25 +32,8 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
-    // 获取数据库
-    this.rdbStore.loadRdbStore(this.context, storeConfig)
-      .then(() => {
-        console.log('RdbStore acquired.');
-
-        // 初始化数据库
-        this.rdbStore.execute(tableCreationQuery)
-          .then(() => {
-            console.log('Successfully initialized RdbStore.');
-          })
-          .catch((error: BusinessError) => {
-            console.error('Failed to initialize RdbStore: ' + error);
-            return;
-          });
-      })
-      .catch((error: BusinessError) => {
-        console.error('Error getting RdbStore: ', error);
-        return;
-      });
+    // 获取并初始化数据库
+    this.initRdbStore();
 
     // 获取 preferences
     this.preferences.loadPreferences(this.context, preferencesName)
@@ -66,9 +49,37 @@ export default class EntryAbility extends UIAbility {
         i18n.System.setAppPreferredLanguage(prefLanguage as string);
       })
       .catch((error: BusinessError) => {
-        console.error('Error getting preferences: ' + error);
+        console.error('Error getting preferences: ', error);
         return;
       });
+  }
+
+  private async initRdbStore(): Promise<void> {
+    try {
+      await this.rdbStore.loadRdbStore(this.context, storeConfig);
+      console.log('RdbStore acquired.');
+
+      await this.rdbStore.execute(tableCreationQuery);
+      console.log('Successfully initialized RdbStore.');
+    } catch (error) {
+      const err = error as BusinessError;
+
+      // 14800020：数据库损坏，删除后重建
+      if (err.code == 14800020) {
+        console.error('RdbStore corrupted, rebuilding: ', err.code, err.message);
+        try {
+          await relationalStore.deleteRdbStore(this.context, storeConfig.name);
+          await this.rdbStore.loadRdbStore(this.context, storeConfig);
+          await this.rdbStore.execute(tableCreationQuery);
+          console.log('Successfully rebuilt RdbStore.');
+        } catch (rebuildError) {
+          const rebuildErr = rebuildError as BusinessError;
+          console.error('Failed to rebuild RdbStore: ', rebuildErr.code, rebuildErr.message);
+        }
+      } else {
+        console.error('Failed to initialize RdbStore: ', err.code, err.message);
+      }
+    }
   }
 
   onDestroy(): void {

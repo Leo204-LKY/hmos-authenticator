@@ -1,6 +1,4 @@
-import Want from '@ohos.app.ability.Want';
-import { ConfigurationConstant, Context } from '@kit.AbilityKit';
-import { common } from '@kit.AbilityKit';
+import { ConfigurationConstant, Want, common } from '@kit.AbilityKit';
 import { SettingsSwitchItem } from '../components/SettingsSwitchItem';
 import { Preferences } from '../models/Preferences';
 import { EditableTitleBar, window } from '@kit.ArkUI';
@@ -41,7 +39,7 @@ struct SettingsPage {
   @State selectedColorModeIndex: number = -1;
   @State selectedColorModeValue: ResourceStr = '';
   @State currentPreferredLanguage: string = 'default';
-  private appContext = getContext(this).getApplicationContext()
+  private appContext: common.ApplicationContext | undefined = undefined;
   private windowClass = AppStorage.get('windowClass') as window.Window;
 
   build() {
@@ -101,7 +99,7 @@ struct SettingsPage {
                 title: $r('app.string.SettingsPage_privacyPolicy'),
                 onItemClick: () => {
                   goToUrl(
-                    this,
+                    this.getUIContext().getHostContext() as common.UIAbilityContext,
                     'https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1573492775360423168'
                   )
                 }
@@ -124,6 +122,8 @@ struct SettingsPage {
   }
 
   aboutToAppear(): void {
+    this.appContext = this.getUIContext().getHostContext()?.getApplicationContext();
+
     preferences.get(PreferenceConstants.PRIVACY_MODE, true)
       .then((privacyMode) => {
         this.privacyMode = privacyMode as boolean;
@@ -168,7 +168,7 @@ struct SettingsPage {
     let newColorMode = Array.from(colorModeMap.values())[index];
     preferences.set(PreferenceConstants.COLOR_MODE, newColorMode)
       .then(() => {
-        this.appContext.setColorMode(newColorMode);
+        this.appContext?.setColorMode(newColorMode);
       });
   }
 }

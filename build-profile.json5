@@ -1,11 +1,26 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/likey/.ohos/config/default_hmos-authenticator_ZSI1ijJoF5nhv4eU_UOQO9Rd-dMnJuVc0DqTtTIlyQU=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BE9AC2FB2D946A88F4785A9DDBCFA3214492A9A69F99CCFD4CCDC363176224A1532A3EFBB3A9969",
+          "profile": "/Users/likey/.ohos/config/default_hmos-authenticator_ZSI1ijJoF5nhv4eU_UOQO9Rd-dMnJuVc0DqTtTIlyQU=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/likey/.ohos/config/default_hmos-authenticator_ZSI1ijJoF5nhv4eU_UOQO9Rd-dMnJuVc0DqTtTIlyQU=.p12",
+          "storePassword": "0000001BC4AFD6C21B3CD8B23AF44D2AD8805AD570CDF965188AE260D3A2BCDE823901E4DD8BFCE31CB693"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "5.0.0(12)",
+        "targetSdkVersion": "26.0.0",
+        "compatibleSdkVersion": "26.0.0",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {

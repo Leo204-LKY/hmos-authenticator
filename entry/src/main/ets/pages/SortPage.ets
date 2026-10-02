@@ -2,7 +2,7 @@
 拖拽排序/动画参考: https://developer.huawei.com/consumer/cn/forum/topic/0208168118399688556?fid=0109140870620153026
  */
 
-import { EditableLeftIconType, EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar';
+import { EditableLeftIconType, EditableTitleBar } from '@kit.ArkUI';
 import { AuthenticatorClass } from '../models/AuthenticatorClass';
 import { SortPageAuthenticatorItem } from '../components/SortPageAuthenticatorItem';
 import { Preferences } from '../models/Preferences';

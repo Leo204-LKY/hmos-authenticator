@@ -11,7 +11,7 @@ export struct ConfirmRemoveDialog {
   private countdownTime: number = 10;
   private countdownIntervalId: number | undefined;
   @State removeEnabled: boolean = false;
-  @State removeButtonText: string = `${getContext(this).resourceManager.getStringSync($r('app.string.ConfirmRemoveDialog_removeButton'))}(${this.countdownTime})`;
+  @State removeButtonText: string = '';
   @State inputCode: string = '';
 
   build() {
@@ -93,6 +93,7 @@ export struct ConfirmRemoveDialog {
     this.verificationCode = code;
 
     this.countdownTime = 10;
+    this.removeButtonText = this.buildRemoveButtonText();
     this.countdownIntervalId = setInterval(() => { this.countdown(); }, 1000);
   }
 
@@ -104,12 +105,17 @@ export struct ConfirmRemoveDialog {
     this.countdownTime--;
     if (this.countdownTime === 0) {
       this.checkIfAllowRemove();
-      this.removeButtonText = getContext(this).resourceManager.getStringSync($r('app.string.ConfirmRemoveDialog_removeButton'))
+      this.removeButtonText = this.getUIContext().getHostContext()?.resourceManager.getStringByNameSync('ConfirmRemoveDialog_removeButton') ?? ''
       this.stopCountdown()
     } else {
       this.removeEnabled = false;
-      this.removeButtonText = `${getContext(this).resourceManager.getStringSync($r('app.string.ConfirmRemoveDialog_removeButton'))}(${this.countdownTime})`
+      this.removeButtonText = this.buildRemoveButtonText()
     }
+  }
+
+  private buildRemoveButtonText(): string {
+    let removeButton = this.getUIContext().getHostContext()?.resourceManager.getStringByNameSync('ConfirmRemoveDialog_removeButton') ?? ''
+    return `${removeButton}(${this.countdownTime})`
   }
 
   private stopCountdown() {

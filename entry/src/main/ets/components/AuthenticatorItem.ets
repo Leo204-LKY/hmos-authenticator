@@ -118,7 +118,7 @@ export struct AuthenticatorItem {
       })
     this.updateTimeLeft(Math.floor(Date.now() / 1000))
 
-    getContext(this).eventHub.on(EventConstants.ON_EMIT_TIMESTAMP, (timestamp: number) => {
+    this.getUIContext().getHostContext()?.eventHub.on(EventConstants.ON_EMIT_TIMESTAMP, (timestamp: number) => {
       this.updateTimeLeft(timestamp)
     });
   }
@@ -139,6 +139,6 @@ export struct AuthenticatorItem {
   }
 
   private deleteAuthenticator() {
-    getContext(this).eventHub.emit(EventConstants.ON_DELETE_AUTHENTICATOR, this.authenticatorId);
+    this.getUIContext().getHostContext()?.eventHub.emit(EventConstants.ON_DELETE_AUTHENTICATOR, this.authenticatorId);
   }
 }

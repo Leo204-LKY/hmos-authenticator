@@ -1,4 +1,4 @@
-import relationalStore from '@ohos.data.relationalStore'
+import { relationalStore } from '@kit.ArkData'
 import { RelationalStore } from '../models/RelationalStore'
 import { Preferences } from '../models/Preferences'
 import { AuthenticatorClass } from '../models/AuthenticatorClass'
@@ -27,8 +27,8 @@ struct Index {
         if (this.authenticators.length == 0) {
           EmptyIndexHint()
         } else {
-          GridRow({ columns: { sm: 4, md: 8, lg: 12 } }) {
-            GridCol({ span: { sm: 4, md: 6, lg: 8 }, offset: { md: 1, lg: 2 } }) {
+          GridRow({ columns: { xs: 4, sm: 4, md: 8, lg: 12, xl: 12, xxl: 12 } }) {
+            GridCol({ span: { xs: 4, sm: 4, md: 6, lg: 8, xl: 8, xxl: 8 }, offset: { xs: 0, sm: 0, md: 1, lg: 2, xl: 2, xxl: 2 } }) {
               List({ space: 10 }) {
                 ForEach(this.authenticators, (item: AuthenticatorClass) => {
                   AuthenticatorItem({ authenticator: item })
@@ -59,8 +59,8 @@ struct Index {
   aboutToAppear(): void {
     this.updateAuthenticators();
     setInterval(() => { this.emitTimestamp(); }, 1000);
-    getContext(this).eventHub.on(EventConstants.ON_DELETE_AUTHENTICATOR, (id: number) => { this.deleteAuthenticator(id); });
-    getContext(this).eventHub.on(EventConstants.ON_UPDATE_AUTHENTICATORS, () => { this.updateAuthenticators(); })
+    this.getUIContext().getHostContext()?.eventHub.on(EventConstants.ON_DELETE_AUTHENTICATOR, (id: number) => { this.deleteAuthenticator(id); });
+    this.getUIContext().getHostContext()?.eventHub.on(EventConstants.ON_UPDATE_AUTHENTICATORS, () => { this.updateAuthenticators(); })
     preferences.get(PreferenceConstants.PRIVACY_MODE, true)
       .then((value: prefClass.ValueType) => {
         let privacyMode = value as boolean;
@@ -77,7 +77,7 @@ struct Index {
 
   private emitTimestamp() {
     const timestamp = Math.floor(Date.now() / 1000);
-    getContext(this).eventHub.emit(EventConstants.ON_EMIT_TIMESTAMP, timestamp);
+    this.getUIContext().getHostContext()?.eventHub.emit(EventConstants.ON_EMIT_TIMESTAMP, timestamp);
   }
 
   private async deleteAuthenticator(idToRemove: number) {

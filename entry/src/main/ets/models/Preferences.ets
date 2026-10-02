@@ -1,4 +1,4 @@
-import preferences from '@ohos.data.preferences';
+import { preferences } from '@kit.ArkData';
 import { common } from '@kit.AbilityKit';
 
 export class Preferences {

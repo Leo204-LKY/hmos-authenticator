@@ -1,4 +1,4 @@
-import url from '@ohos.url';
+import { url } from '@kit.ArkTS';
 import { OtpAlgorithms } from '../models/AuthenticatorClass';
 import { Preferences } from '../models/Preferences';
 import { ValuesBucket } from '@kit.ArkData';
