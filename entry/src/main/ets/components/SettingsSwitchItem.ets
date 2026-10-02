@@ -1,3 +1,5 @@
+import { getSwitchImmersiveMaterial } from '../utils/ImmersiveMaterials';
+
 @Component
 export struct SettingsSwitchItem {
   @Require @Prop title: ResourceStr;
@@ -22,6 +24,7 @@ export struct SettingsSwitchItem {
         .layoutWeight(1)
 
         Toggle({ type: ToggleType.Switch, isOn: this.isOn })
+          .systemMaterial(getSwitchImmersiveMaterial())
           .onChange((isOn: boolean) => { this.onChange(isOn); })
           .margin({ left: 8 })
       }

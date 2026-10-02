@@ -5,6 +5,7 @@ const buttonLightEffect: uiMaterial.LightEffectOptions = { color: Color.White };
 let iconButtonMaterial: uiMaterial.ImmersiveMaterial | undefined = undefined;
 let textButtonMaterial: uiMaterial.ImmersiveMaterial | undefined = undefined;
 let warningButtonMaterial: uiMaterial.ImmersiveMaterial | undefined = undefined;
+let switchMaterial: uiMaterial.ImmersiveMaterial | undefined = undefined;
 
 /**
  * 圆形图标按钮（标题栏菜单、滑动操作按钮）的沉浸光感材质：
@@ -59,4 +60,18 @@ export function getWarningButtonImmersiveMaterial(): uiMaterial.ImmersiveMateria
     });
   }
   return warningButtonMaterial;
+}
+
+/**
+ * Switch 型 Toggle 的沉浸光感开启标记：
+ * 材质参数不影响实际视觉效果，由组件内部预设视觉参数呈现。
+ */
+export function getSwitchImmersiveMaterial(): uiMaterial.ImmersiveMaterial | undefined {
+  if (!uiMaterial.isImmersiveMaterialSupported()) {
+    return undefined;
+  }
+  if (switchMaterial === undefined) {
+    switchMaterial = new uiMaterial.ImmersiveMaterial();
+  }
+  return switchMaterial;
 }
